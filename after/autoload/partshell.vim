@@ -1,4 +1,4 @@
-function! commands#Part(...) range abort
+function! partshell#Part(...) range abort
   let l:save = @@
 
   execute 'silent noautocmd keepjumps normal! gv'
@@ -32,7 +32,7 @@ function! commands#Part(...) range abort
   let @@ = l:save
 endfunction
 
-function! commands#ArgsSh(cmd) abort
+function! partshell#ArgsSh(cmd) abort
   let l:result = systemlist(a:cmd)
   if v:shell_error != 0
     echom "Non-zero exit status running ".a:cmd
@@ -47,7 +47,7 @@ function! commands#ArgsSh(cmd) abort
   execute 'args ' . l:args_list
 endfunction
 
-function! commands#GrepSh(bang, cmd) abort
+function! partshell#GrepSh(bang, cmd) abort
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -60,7 +60,7 @@ function! commands#GrepSh(bang, cmd) abort
   let &grepprg = l:original_grepprg
 endfunction
 
-function! commands#MakeSh(bang, cmd) abort
+function! partshell#MakeSh(bang, cmd) abort
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -73,7 +73,7 @@ function! commands#MakeSh(bang, cmd) abort
   let &makeprg = l:original_makeprg
 endfunction
 
-function! commands#Sh(bang, cmd) abort
+function! partshell#Sh(bang, cmd) abort
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
