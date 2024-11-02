@@ -1,0 +1,6 @@
+command! -nargs=+ -bang -complete=shellcmd Gsh call commands#GrepSh(<bang>0, <q-args>)
+command! -nargs=+ -bang -complete=shellcmd Msh call commands#MakeSh(<bang>0, <q-args>)
+command! -nargs=+ -bang -complete=shellcmd Sh call commands#Sh(<bang>0, <q-args>)
+command! -nargs=+ -complete=shellcmd Ash call commands#ArgsSh(<q-args>)
+command! -range -nargs=* -complete=command P silent <line1>,<line2>call commands#Part(<q-args>)
+command! -range -nargs=+ -complete=shellcmd Psh <line1>,<line2>call commands#Part('!'.<q-args>)
