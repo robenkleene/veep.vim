@@ -3,4 +3,3 @@ command! -nargs=+ -bang -complete=shellcmd Msh call partshell#MakeSh(<bang>0, <q
 command! -nargs=+ -bang -complete=shellcmd Sh call partshell#Sh(<bang>0, <q-args>)
 command! -nargs=+ -complete=shellcmd Ash call partshell#ArgsSh(<q-args>)
 command! -range -nargs=* -complete=command P silent <line1>,<line2>call partshell#Part(<q-args>)
-command! -range -nargs=+ -complete=shellcmd Psh <line1>,<line2>call partshell#Part('!'.<q-args>)
