@@ -1,5 +1,5 @@
-command! -nargs=+ -bang -complete=shellcmd Gsh call partshell#GrepSh(<bang>0, <q-args>)
-command! -nargs=+ -bang -complete=shellcmd Msh call partshell#MakeSh(<bang>0, <q-args>)
 command! -nargs=+ -bang -complete=shellcmd Sh call partshell#Sh(<bang>0, <q-args>)
-command! -nargs=+ -complete=shellcmd Ash call partshell#ArgsSh(<q-args>)
+command! -nargs=+ -complete=shellcmd Shargs call partshell#ArgsSh(<q-args>)
+command! -nargs=+ -bang -complete=shellcmd Shgrep call partshell#GrepSh(<bang>0, <q-args>)
+command! -nargs=+ -bang -complete=shellcmd Shmake call partshell#MakeSh(<bang>0, <q-args>)
 command! -range -nargs=* -complete=command P silent <line1>,<line2>call partshell#Part(<q-args>)
