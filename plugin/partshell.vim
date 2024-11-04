@@ -1,4 +1,4 @@
-command! -nargs=+ -bang -complete=shellcmd Sh call partshell#Sh(<bang>0, <q-args>)
+command! -nargs=+ -bang -complete=shellcmd Shnew call partshell#Sh(<bang>0, <q-args>)
 command! -nargs=+ -complete=shellcmd Shargs call partshell#ArgsSh(<q-args>)
 command! -nargs=+ -bang -complete=shellcmd Shgrep call partshell#GrepSh(<bang>0, <q-args>)
 command! -nargs=+ -bang -complete=shellcmd Shmake call partshell#MakeSh(<bang>0, <q-args>)
