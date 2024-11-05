@@ -73,7 +73,7 @@ function! partshell#MakeSh(bang, cmd) abort
   let &makeprg = l:original_makeprg
 endfunction
 
-function! partshell#Sh(bang, cmd) abort
+function! partshell#Sh(bang, cmd, split) abort
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -88,7 +88,7 @@ function! partshell#Sh(bang, cmd) abort
   " This could be either `enew` or `new`, `:tag` works like `enew` and `:h`
   " and `:Man` work like `new`
   if !a:bang || bufwinnr(l:basename) < 0
-    new
+    execute a:split
   endif
   " Reset undo for this buffer
   let l:oldundolevels=&undolevels
@@ -103,13 +103,13 @@ function! partshell#Sh(bang, cmd) abort
     " Wrap `file` in a try-catch to suppress errors if the name already exists
     " (The buffer will continue to show up as `[No Name]`)
     try
-      execute 'file '.l:basename.(i > 1 ? ' '.l:i : '')
-      file
+      execute 'silent file '.l:basename.(i > 1 ? ' '.l:i : '')
+      silent file
       break
     catch
     endtry
   endfor
-  execute 'silent 0r !'.l:cmd
+  execute 'silent! 0r !'.l:cmd
   norm Gddgg
   let &l:undolevels=l:oldundolevels
   filetype detect
