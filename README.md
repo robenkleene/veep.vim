@@ -2,17 +2,17 @@
 
 Partshell is a Vim plugin that provides helper commands for working with shell commands. It provides four new commands:
 
-## `Shedit`
+## `She[dit]`
 
-## `Shgrep`
+## `Shgr[ep][!]`
 
-## `Shmake`
+## `Shmak[e][!]`
 
-## `Shlmake`
+## `Shlmak[e][!]`
 
-## `Shlgrep`
+## `Shlgr[ep][!]`
 
-## `Shnew`, `Shvnew`, `Shtabnew`
+## `Shnew[!]`, `Shvne[w][!]`, `Shtabnew[!]`, `Shne[w][!]`
 
 With a bang use the existing buffer
 
