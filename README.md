@@ -2,11 +2,7 @@
 
 Partshell is a Vim plugin that provides helper commands for working with shell commands. It provides four new commands:
 
-1. `Ash`: Populates the `argslist` with the results of a shell command.
-2. `Gsh`: Populates the `quickfix` list with the results of a shell command.
-3. `
-
-## `Shargs`
+## `Shedit`
 
 ## `Shgrep`
 
@@ -15,6 +11,10 @@ Partshell is a Vim plugin that provides helper commands for working with shell c
 ## `Shlmake`
 
 ## `Shlgrep`
+
+## `Shnew`, `Shvnew`, `Shtabnew`
+
+With a bang use the existing buffer
 
 ## `P`
 
