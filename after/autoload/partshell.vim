@@ -109,7 +109,7 @@ function! partshell#Sh(bang, cmd, split) abort
     catch
     endtry
   endfor
-  execute 'silent 0r !'.l:cmd
+  execute 'silent! 0r !'.l:cmd
   norm Gddgg
   let &l:undolevels=l:oldundolevels
   filetype detect
