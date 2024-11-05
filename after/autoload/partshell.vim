@@ -103,8 +103,8 @@ function! partshell#Sh(bang, cmd, split) abort
     " Wrap `file` in a try-catch to suppress errors if the name already exists
     " (The buffer will continue to show up as `[No Name]`)
     try
-      execute 'file '.l:basename.(i > 1 ? ' '.l:i : '')
-      file
+      execute 'silent file '.l:basename.(i > 1 ? ' '.l:i : '')
+      silent file
       break
     catch
     endtry
