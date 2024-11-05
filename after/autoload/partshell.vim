@@ -32,7 +32,7 @@ function! partshell#Part(...) range abort
   let @@ = l:save
 endfunction
 
-function! partshell#ArgsSh(cmd) abort
+function! partshell#EditSh(cmd, edit) abort
   let l:result = systemlist(a:cmd)
   if v:shell_error != 0
     echom "Non-zero exit status running ".a:cmd
@@ -44,10 +44,10 @@ function! partshell#ArgsSh(cmd) abort
   endif
   let l:escaped_files = map(l:result, {_, v -> fnameescape(v)})
   let l:args_list = join(l:escaped_files, ' ')
-  execute 'args ' . l:args_list
+  execute a:edit . ' ' . l:args_list
 endfunction
 
-function! partshell#GrepSh(bang, cmd) abort
+function! partshell#GrepSh(bang, cmd)
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -60,7 +60,7 @@ function! partshell#GrepSh(bang, cmd) abort
   let &grepprg = l:original_grepprg
 endfunction
 
-function! partshell#MakeSh(bang, cmd) abort
+function! partshell#MakeSh(bang, cmd)
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
