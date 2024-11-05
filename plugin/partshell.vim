@@ -1,5 +1,5 @@
 command! -nargs=+ -complete=shellcmd Shedit call partshell#ArgsSh(<q-args>)
 command! -nargs=+ -bang -complete=shellcmd Shgrep call partshell#GrepSh(<bang>0, <q-args>)
 command! -nargs=+ -bang -complete=shellcmd Shmake call partshell#MakeSh(<bang>0, <q-args>)
-command! -nargs=+ -bang -complete=shellcmd Shnew call partshell#Sh(<bang>0, <q-args>)
+command! -nargs=+ -bang -complete=shellcmd Shnew call partshell#Sh(<bang>0, <q-args>, 'new')
 command! -range -nargs=* -complete=command P silent <line1>,<line2>call partshell#Part(<q-args>)
