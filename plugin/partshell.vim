@@ -1,13 +1,19 @@
 command! -range -nargs=* -complete=command P silent <line1>,<line2>call partshell#Part(<q-args>)
 
+" Args
 command! -nargs=+ -complete=shellcmd Shargs call partshell#EditSh(<q-args>, 'args')
 command! -nargs=+ -complete=shellcmd Shar call partshell#EditSh(<q-args>, 'args')
 
+" Grep
 command! -nargs=+ -bang -complete=shellcmd Shgrep call partshell#GrepSh(<bang>0, <q-args>)
 command! -nargs=+ -bang -complete=shellcmd Shgr call partshell#GrepSh(<bang>0, <q-args>)
 
-command! -nargs=+ -bang -complete=shellcmd Shmake call partshell#MakeSh(<bang>0, <q-args>)
-command! -nargs=+ -bang -complete=shellcmd Shmak call partshell#MakeSh(<bang>0, <q-args>)
+" Make
+command! -nargs=+ -bang -complete=shellcmd Shmake call partshell#MakeSh(<bang>0, <q-args>, 0)
+command! -nargs=+ -bang -complete=shellcmd Shmak call partshell#MakeSh(<bang>0, <q-args>, 0)
+
+command! -nargs=+ -bang -complete=shellcmd Shlmake call partshell#MakeSh(<bang>0, <q-args>, 1)
+command! -nargs=+ -bang -complete=shellcmd Shlmak call partshell#MakeSh(<bang>0, <q-args>, 1)
 
 " Splits
 command! -nargs=+ -bang -complete=shellcmd Shenew call partshell#Sh(<bang>0, <q-args>, 'enew')

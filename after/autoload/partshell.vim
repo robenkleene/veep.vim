@@ -60,7 +60,7 @@ function! partshell#GrepSh(bang, cmd)
   let &grepprg = l:original_grepprg
 endfunction
 
-function! partshell#MakeSh(bang, cmd)
+function! partshell#MakeSh(bang, cmd, lmake)
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -68,8 +68,12 @@ function! partshell#MakeSh(bang, cmd)
   let l:original_makeprg = &makeprg
   " The default way of running shell commands using `!` allows the use of `|`
   " to pipe unescaped, so reproduce that behavior here.
-  let &makeprg=escape(a:cmd, '|')
-  execute "make".(a:bang ? '!':'')
+  let &makeprg = escape(a:cmd, '|')
+  if a:lmake
+    execute "lmake".(a:bang ? '!':'')
+  else
+    execute "make".(a:bang ? '!':'')
+  endif
   let &makeprg = l:original_makeprg
 endfunction
 
