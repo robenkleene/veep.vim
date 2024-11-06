@@ -1,8 +1,8 @@
 command! -range -nargs=* -complete=command P silent <line1>,<line2>call partshell#Part(<q-args>)
 
 " Args
-command! -nargs=+ -complete=shellcmd Shargs call partshell#EditSh(<q-args>, 'args')
-command! -nargs=+ -complete=shellcmd Shar call partshell#EditSh(<q-args>, 'args')
+command! -nargs=+ -bang -complete=shellcmd Shargs call partshell#EditSh(<bang>0, <q-args>, 'args')
+command! -nargs=+ -bang -complete=shellcmd Shar call partshell#EditSh(<bang>0, <q-args>, 'args')
 
 " Grep
 command! -nargs=+ -bang -complete=shellcmd Shgrep call partshell#GrepSh(<bang>0, <q-args>, 0)

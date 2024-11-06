@@ -32,7 +32,7 @@ function! partshell#Part(...) range abort
   let @@ = l:save
 endfunction
 
-function! partshell#EditSh(cmd, edit) abort
+function! partshell#EditSh(bang, cmd, edit) abort
   let l:result = systemlist(a:cmd)
   if v:shell_error != 0
     echom "Non-zero exit status running ".a:cmd
@@ -44,7 +44,7 @@ function! partshell#EditSh(cmd, edit) abort
   endif
   let l:escaped_files = map(l:result, {_, v -> fnameescape(v)})
   let l:args_list = join(l:escaped_files, ' ')
-  execute a:edit . ' ' . l:args_list
+  execute a:edit.(a:bang ? '!':'').' '.l:args_list
 endfunction
 
 function! partshell#GrepSh(bang, cmd, location)
