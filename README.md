@@ -2,7 +2,7 @@
 
 Partshell is a Vim plugin that provides helper commands for working with shell commands. It provides four new commands:
 
-## `She[dit]`
+## `Shar[gs][!]`
 
 ## `Shgr[ep][!]`
 
