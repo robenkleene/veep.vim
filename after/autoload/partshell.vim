@@ -47,7 +47,7 @@ function! partshell#EditSh(cmd, edit) abort
   execute a:edit . ' ' . l:args_list
 endfunction
 
-function! partshell#GrepSh(bang, cmd)
+function! partshell#GrepSh(bang, cmd, location)
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -56,11 +56,15 @@ function! partshell#GrepSh(bang, cmd)
   " The default way of running shell commands using `!` allows the use of `|`
   " to pipe unescaped, so reproduce that behavior here.
   let &grepprg=escape(a:cmd, '|')
-  execute 'grep'.(a:bang ? '!':'')
+  if a:location
+    execute 'lgrep'.(a:bang ? '!':'')
+  else
+    execute 'grep'.(a:bang ? '!':'')
+  endif
   let &grepprg = l:original_grepprg
 endfunction
 
-function! partshell#MakeSh(bang, cmd)
+function! partshell#MakeSh(bang, cmd, location)
   if exists('*getcmdwintype') && !empty(getcmdwintype())
     echom "Not valid in command-line window"
     return
@@ -68,8 +72,12 @@ function! partshell#MakeSh(bang, cmd)
   let l:original_makeprg = &makeprg
   " The default way of running shell commands using `!` allows the use of `|`
   " to pipe unescaped, so reproduce that behavior here.
-  let &makeprg=escape(a:cmd, '|')
-  execute "make".(a:bang ? '!':'')
+  let &makeprg = escape(a:cmd, '|')
+  if a:location
+    execute "lmake".(a:bang ? '!':'')
+  else
+    execute "make".(a:bang ? '!':'')
+  endif
   let &makeprg = l:original_makeprg
 endfunction
 
