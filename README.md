@@ -10,7 +10,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### Example
 
-`Shargs fd partshell`
+`Shargs fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name recursively from the current directory.
 
 ### Closest Built-In Command
 
