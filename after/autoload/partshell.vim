@@ -86,7 +86,10 @@ function! partshell#Sh(bang, cmd, split) abort
     echom "Not valid in command-line window"
     return
   endif
+  " Use previous file for ending `%`
   let l:cmd = substitute(a:cmd, '\s%$', ' #', '')
+  " Use previous file for inline `%`
+  let l:cmd = substitute(l:cmd, '\s%\s', ' # ', '')
   let l:basename = fnameescape(a:cmd)
   " Neither approach supports `DiffSh git diff %` well, but this one at
   " least allows `DiffSh git diff #`
