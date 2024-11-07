@@ -14,7 +14,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### Closest Built-In Command
 
-<p><code>`args `fd partshell`</code> (but this won't handle matches with spaces in their names properly).</p>
+<p><code>args `fd partshell`</code> (but this won't handle matches with spaces in their names properly).</p>
 
 ## `Shgr[ep][!]`
 
