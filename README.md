@@ -1,8 +1,20 @@
 # Partshell
 
-Partshell is a Vim plugin that provides helper commands for working with shell commands. It provides four new commands:
+Partshell is a Vim plugin that provides helper commands for working with shell commands.
+
+
 
 ## `Shar[gs][!]`
+
+Populates the argument list with the result of a shell command. Each line is interpreted as a path to a file. A NULL byte terminates input.
+
+### Example
+
+`Shargs fd partshell`
+
+### Closest Built-In Command
+
+`args \`fd partshell\`` (but this won't handle matches with spaces in their names properly).
 
 ## `Shgr[ep][!]`
 
