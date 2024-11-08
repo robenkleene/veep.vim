@@ -1,8 +1,8 @@
 # Partshell
 
-Partshell is a Vim plugin that provides helper commands for working with shell commands.
+Partshell is a Vim plugin that provides helper commands for working with shell commands. For example, `:Shgrep` is an easy way to use any `grep` program, for example `:Shgrep rg foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
-
+One advantage of this approach is it means it's flexible, for example [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` or `:Shmake pbpaste` Vim will parse `grep` or compile output respectively, allowing jumping directly to lines with matches or errors.
 
 ## `Shar[gs][!]`
 
