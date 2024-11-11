@@ -86,13 +86,15 @@ function! partshell#Sh(bang, cmd, split) abort
     echom "Not valid in command-line window"
     return
   endif
-  " Use previous file for ending `%`
-  let l:cmd = substitute(a:cmd, '\s%$', ' #', '')
-  " Use previous file for inline `%`
-  let l:cmd = substitute(l:cmd, '\s%\s', ' # ', '')
-  let l:basename = fnameescape(a:cmd)
-  " `system(a:cmd)` does not support `%` for the current file
+
+  " `system(a:cmd)` does not support `%` for the current file, so instead we
+  " use `execute 'silent! 0r !'.l:cmd` below which supports `%`, but since
+  " it's a new window, we need to reference the previous file
   " let l:result = system(a:cmd)
+  " Use previous file for inline ` % `, and ending `%$`
+  let l:cmd = substitute(a:cmd, '\s%\(\s\|$\)', ' #\1', '')
+  let l:basename = fnameescape(a:cmd)
+
   if !a:bang || bufwinnr(l:basename) < 0
     execute a:split
   endif
