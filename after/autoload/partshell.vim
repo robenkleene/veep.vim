@@ -91,13 +91,8 @@ function! partshell#Sh(bang, cmd, split) abort
   " Use previous file for inline `%`
   let l:cmd = substitute(l:cmd, '\s%\s', ' # ', '')
   let l:basename = fnameescape(a:cmd)
-  " Neither approach supports `DiffSh git diff %` well, but this one at
-  " least allows `DiffSh git diff #`
+  " `system(a:cmd)` does not support `%` for the current file
   " let l:result = system(a:cmd)
-  " new
-  " put =l:result
-  " This could be either `enew` or `new`, `:tag` works like `enew` and `:h`
-  " and `:Man` work like `new`
   if !a:bang || bufwinnr(l:basename) < 0
     execute a:split
   endif
