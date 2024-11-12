@@ -1,16 +1,16 @@
 # Partshell
 
-Partshell is a Vim plugin that provides helper commands for working with shell commands. For example, `:GrepSh` is an easy way to use any `grep` program, for example `:GrepSh rg foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:GrepSh` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:GrepSh rg foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
-One advantage of this approach is it means it's flexible, for example [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:GrepSh pbpaste` or `:MakeSh pbpaste` Vim will parse `grep` or compile output respectively, allowing jumping directly to lines with matches or errors.
+One advantage of this approach it's flexibility. For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:GrepSh pbpaste` Vim will parse `grep` output from the clipboard.
 
-Each command also has a shorthand, for example `Gsh` is the same as `GrepSh`.
+Each command also has a shorthand, the shorthand for `GrepSh` is `Gsh`.
 
-When available, adding a bang (`!`), does the same behavior as the equivalent Vim built-in command. E.g., `:GrepSh!` won't automatically jump to the first match, just like `:grep!`.
+Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:GrepSh!` won't automatically jump to the first match, just like `:grep!`.
 
 ## `ArgsSh[!]`, `Ash[!]`
 
-Populates the argument list with the result of a shell command. Each line is interpreted as a path to a file. A NULL byte terminates input.
+Populates the argument list with the result of a shell command. Each line is interpreted as a path to a file (a NULL byte terminates input).
 
 ### Example
 
