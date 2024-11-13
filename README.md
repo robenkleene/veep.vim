@@ -14,11 +14,11 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### Example
 
-`:ArgsSh fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because that's how `fd` works by default).
+`:ArgsSh fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because the way `fd` works by default).
 
 ### Closest Built-In Command
 
-<p><code>args `fd partshell`</code> (but this won't handle matches with spaces in their names properly).</p>
+<p><code>args `fd partshell`</code> (but this won't handle matches with spaces in their filenames properly).</p>
 
 ## Grep
 
@@ -28,11 +28,11 @@ Populates the argument list with the result of a shell command. Each line is int
 
 Populate the quick fix list with the result of a shell command.
 
-- With a bang (`!`), don't automatically jump to the first match.
+- With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
-`GrepSh`
+- `GrepSh rg partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
 
 ### `LgrepSh[!]`, `LGsh[!]`
 
