@@ -4,11 +4,13 @@ Partshell is a Vim plugin that adds helper commands for working with shell comma
 
 One advantage of this approach it's flexibility. For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:GrepSh pbpaste` Vim will parse `grep` output from the clipboard.
 
-Each command also has a shorthand, the shorthand for `GrepSh` is `Gsh`.
+Each command also has a shorthand, the shorthand for `:GrepSh` is `:Gsh`.
 
 Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:GrepSh!` won't automatically jump to the first match, just like `:grep!`.
 
-## `ArgsSh[!]`, `Ash[!]`
+## `:ArgsSh[!]`, `:Ash[!]`
+
+Wrapper around `:args`.
 
 Populates the argument list with the result of a shell command. Each line is interpreted as a path to a file (a NULL byte terminates input).
 
@@ -22,50 +24,55 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ## Grep
 
-`grep` commands.
+`:grep` commands.
 
-### `GrepSh[!]`, `Gsh[!]`
+### `:GrepSh[!]`, `:Gsh[!]`
 
-Populate the quick fix list with the result of a shell command.
-
-- With a bang (`!`), it doesn't automatically jump to the first match.
+Populate the quick fix list with the result of a shell command. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
-- `GrepSh rg partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
+`:GrepSh rg partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
 
-### `LgrepSh[!]`, `LGsh[!]`
+### Closest Built-In Command
 
-The same as `GrepSh` but populate the location list.
+`:cexpr system('rg --vimgrep partshell')`
+or `:set grepprg=rg\ --vimgrep | grep "search_term"` but that has the side effect of setting `grepprg` (which might be desirable! Setting `grepprg` to `rg` is a great alternative to this approach if the built-in `:grep` behavior isn't useful.
+
+### `:LgrepSh[!]`, `:LGsh[!]`
+
+The same as `:GrepSh` but populate the location list instead.
 
 ## Make
 
-`make` commands.
+`:make` commands.
 
-### `MakeSh[!]`, `Msh[!]`
+### `:MakeSh[!]`, `:Msh[!]`
 
-### `LmakeSh[!]`, `LMsh[!]`
+
+
+### `:LmakeSh[!]`, `:LMsh[!]`
 
 ## New Window
 
 Commands that create a new window.
 
-### `Enewsh[!]`, `Esh[!]`
+### `:Enewsh[!]`, `:Esh[!]`
 
-### `NewSh[!]`, `Nsh[!]`
+### `:NewSh[!]`, `:Nsh[!]`
 
-### `TabnewSh[!]`, `Tsh[!]`
+### `:TabnewSh[!]`, `:Tsh[!]`
 
-### `VnewSh[!]`, `Vsh[!]`
+### `:VnewSh[!]`, `:Vsh[!]`
 
 With a bang use the existing buffer
 
-## `P`
+## `:P`
 
-The special `P` (for partial) command.
+The special `:P` (for partial) command.
 
-- `P !` example
-- The `P` command started as a  `B` the [vis](https://www.vim.org/scripts/script.php?script_id=1195).
+- `:P !` example
+- The `:P` command started as a  `B` the [vis](https://www.vim.org/scripts/script.php?script_id=1195).
 
 
 
