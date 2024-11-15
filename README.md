@@ -24,11 +24,9 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ## Grep
 
-`:grep` commands.
-
 ### `:GrepSh[!]`, `:Gsh[!]`
 
-Populate the quick fix list with the result of a shell command. With a bang (`!`), it doesn't automatically jump to the first match.
+Run the builtin `:grep` command using the arguments as `grepprg`. This populates the quickfix list with the matching lines using `grepformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
@@ -36,8 +34,7 @@ Populate the quick fix list with the result of a shell command. With a bang (`!`
 
 ### Closest Built-In Command
 
-`:cexpr system('rg --vimgrep partshell')`
-or `:set grepprg=rg\ --vimgrep | grep "search_term"` but that has the side effect of setting `grepprg` (which might be desirable! Setting `grepprg` to `rg` is a great alternative to this approach if the built-in `:grep` behavior isn't useful.
+`:cexpr system('rg --vimgrep partshell')` or `:set grepprg=rg\ --vimgrep | grep "search_term"` but that has the side effect of setting `grepprg` (which might be desirable! Setting `grepprg` to `rg` is a great alternative if the built-in `:grep` behavior isn't useful).
 
 ### `:LgrepSh[!]`, `:LGsh[!]`
 
@@ -45,11 +42,9 @@ The same as `:GrepSh` but populate the location list instead.
 
 ## Make
 
-`:make` commands.
-
 ### `:MakeSh[!]`, `:Msh[!]`
 
-
+Run the builtin `:make` command using the arguments as `makeprg`. This populates the quickfix list with the lines with errors using `errorformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 ### `:LmakeSh[!]`, `:LMsh[!]`
 
