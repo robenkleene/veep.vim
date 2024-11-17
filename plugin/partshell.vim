@@ -13,6 +13,7 @@ command! -nargs=+ -bang -complete=shellcmd LGsh call partshell#GrepSh(<bang>0, <
 
 " Make
 command! -nargs=+ -bang -complete=shellcmd MakeSh call partshell#MakeSh(<bang>0, <q-args>, 0)
+command! -nargs=+ -bang -complete=shellcmd Msh call partshell#MakeSh(<bang>0, <q-args>, 0)
 
 command! -nargs=+ -bang -complete=shellcmd LmakeSh call partshell#MakeSh(<bang>0, <q-args>, 1)
 command! -nargs=+ -bang -complete=shellcmd LMsh call partshell#MakeSh(<bang>0, <q-args>, 1)
