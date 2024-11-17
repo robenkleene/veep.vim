@@ -50,9 +50,7 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 #### Closest Built-In Command
 
- `:set makeprg=... | make "search_term"` but that has the side effect of setting `makeprg`.
-
-`:cexpr system('')` does not set `makeprg`.
+`:set makeprg=clang\ hello_world.c | make')` does not set `makeprg`.
 
 ### `:LmakeSh[!]`, `:LMsh[!]`
 
