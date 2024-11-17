@@ -36,7 +36,7 @@ Run the builtin `:grep` command using the arguments as `grepprg`. This populates
 
 `:set grepprg=rg\ --vimgrep | grep partshell` but that has the side effect of setting `grepprg` (which might be desirable! Setting `grepprg` to `rg` is a great alternative if the built-in `:grep` behavior isn't useful).
 
-`:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines.
+`:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines (`%` to reference the current file will not work in this context).
 
 ### `:LgrepSh[!]`, `:LGsh[!]`
 
@@ -48,9 +48,15 @@ The same as `:GrepSh` but populate the location list instead.
 
 Run the builtin `:make` command using the arguments as `makeprg`. This populates the quickfix list with the lines with errors using `errorformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
+#### Example
+
+`:MakeSh clang %` compiles the current file with `clang`.
+
 #### Closest Built-In Command
 
-`:set makeprg=clang\ hello_world.c | make')` does not set `makeprg`.
+`:set makeprg=clang\ % | make')` does not set `makeprg`.
+
+`:cexpr system('clang hello_world.c')` will also work (`%` to reference the current file will not work in this context).
 
 ### `:LmakeSh[!]`, `:LMsh[!]`
 
