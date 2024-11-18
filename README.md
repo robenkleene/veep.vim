@@ -18,7 +18,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 `:ArgsSh fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because the way `fd` works by default).
 
-### Closest Built-In Command
+#### Built-In Alternative
 
 <p><code>args `fd partshell`</code> (but this won't handle matches with spaces in their filenames properly).</p>
 
@@ -32,11 +32,11 @@ Run the builtin `:grep` command using the arguments as `grepprg`. This populates
 
 `:GrepSh rg --vimgrep partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
 
-### Closest Built-In Command
+#### Built-In Alternative
 
 `:set grepprg=rg\ --vimgrep | grep partshell` but that has the side effect of setting `grepprg` (which might be desirable! Setting `grepprg` to `rg` is a great alternative if the built-in `:grep` behavior isn't useful).
 
-`:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines (`%` to reference the current file will not work in this context).
+`:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
 
 ### `:LgrepSh[!]`, `:LGsh[!]`
 
@@ -52,11 +52,11 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 `:MakeSh clang %` compiles the current file with `clang`.
 
-#### Closest Built-In Command
+#### Built-In Alternative
 
 `:set makeprg=clang\ % | make')` does not set `makeprg`.
 
-`:cexpr system('clang hello_world.c')` will also work (`%` to reference the current file will not work in this context).
+`:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
 ### `:LmakeSh[!]`, `:LMsh[!]`
 
@@ -64,13 +64,22 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 Commands that create a new window.
 
-### `:Enewsh[!]`, `:Esh[!]`
+### Example
+
+`:EnewSh git diff` to create a new diff buffer containing the output of `git diff`.
+
+### Built-In Alternative
+
+`:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues, looks more like `:new | 0r !git diff ^J norm Gddgg | filetype detect` (`^J` means do `CTRL-V_CTRL-J` which is the new command separator to use after a `!` to perform a separate Vim command instead of piping to a shell command).
+
+### `:EnewSh[!]`, `:Esh[!]`
 
 ### `:NewSh[!]`, `:Nsh[!]`
 
 ### `:TabnewSh[!]`, `:Tsh[!]`
 
 ### `:VnewSh[!]`, `:Vsh[!]`
+
 
 With a bang use the existing buffer
 
