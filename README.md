@@ -66,15 +66,19 @@ Commands that create a new window.
 
 ### Example
 
-`:EnewSh git diff` to create a new diff buffer containing the output of `git diff`.
+`:NewSh git diff` to create a new diff buffer containing the output of `git diff`.
 
 ### Built-In Alternative
 
-`:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues, looks more like `:new | 0r !git diff ^J norm Gddgg | filetype detect` (`^J` means do `CTRL-V_CTRL-J` which is the new command separator to use after a `!` to perform a separate Vim command instead of piping to a shell command).
+`:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues `:new | 0r !git diff ^J norm Gddgg | filetype detect` should work but doesn't seem to in practice (`^J` means do `CTRL-V_CTRL-J` which is the command separator to use after a `:!` to perform a another Vim command instead of piping to a shell command).
 
 ### `:EnewSh[!]`, `:Esh[!]`
 
+Open a new buffer with a shell command in the current window (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
+
 ### `:NewSh[!]`, `:Nsh[!]`
+
+Open a new buffer with a shell command replacing the existing buffer.
 
 ### `:TabnewSh[!]`, `:Tsh[!]`
 
