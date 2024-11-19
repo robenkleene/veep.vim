@@ -4,11 +4,11 @@ Partshell is a Vim plugin that adds helper commands for working with shell comma
 
 One advantage of this approach it's flexibility. For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:GrepSh pbpaste` Vim will parse `grep` output from the clipboard.
 
-Each command also has a shorthand, the shorthand for `:GrepSh` is `:Gsh`.
-
 Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:GrepSh!` won't automatically jump to the first match, just like `:grep!`.
 
-## `:ArgsSh[!]`, `:Ash[!]`
+All the command also support the shortest version of the matching command in Vim, e.g., `:grep` is defined as `:gr[ep]`, so `:GrepSh` also supports `:GrSh`, in documentation this is illustrated by listing the command as `:Gr[ep]Sh`.
+
+## `:Ar[gs]Sh[!]`
 
 Wrapper around `:args`.
 
@@ -24,7 +24,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ## Grep
 
-### `:GrepSh[!]`, `:Gsh[!]`
+### `:Gr[ep]Sh[!]`
 
 Run the builtin `:grep` command using the arguments as `grepprg`. This populates the quickfix list with the matching lines using `grepformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
@@ -38,13 +38,13 @@ Run the builtin `:grep` command using the arguments as `grepprg`. This populates
 
 `:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
 
-### `:LgrepSh[!]`, `:LGsh[!]`
+### `:Lgr[ep]Sh[!]`
 
 The same as `:GrepSh` but populate the location list instead.
 
 ## Make
 
-### `:MakeSh[!]`, `:Msh[!]`
+### `:Mak[e]Sh[!]`
 
 Run the builtin `:make` command using the arguments as `makeprg`. This populates the quickfix list with the lines with errors using `errorformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
@@ -58,7 +58,7 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 `:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
-### `:LmakeSh[!]`, `:LMsh[!]`
+### `:Lmak[e]Sh[!]`
 
 ## New Window
 
@@ -72,17 +72,17 @@ Commands that create a new window.
 
 `:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues `:new | 0r !git diff ^J norm Gddgg | filetype detect` should work but doesn't seem to in practice (`^J` means do `CTRL-V_CTRL-J` which is the command separator to use after a `:!` to perform a another Vim command instead of piping to a shell command).
 
-### `:EnewSh[!]`, `:Esh[!]`
+### `:Ene[w]Sh[!]`
 
 Open a new buffer with a shell command in the current window (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
 
-### `:NewSh[!]`, `:Nsh[!]`
+### `:NewSh[!]`
 
 Open a new buffer with a shell command replacing the existing buffer.
 
-### `:TabnewSh[!]`, `:Tsh[!]`
+### `:TabnewSh[!]`, `:Tabe[dit]sh[!]`
 
-### `:VnewSh[!]`, `:Vsh[!]`
+### `:Vne[w]Sh[!]`
 
 
 With a bang use the existing buffer
