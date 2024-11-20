@@ -74,18 +74,19 @@ Commands that create a new window.
 
 ### `:Ene[w]sh[!]`
 
-Open a new buffer with a shell command in the current window (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
+Open a new buffer containing the result of a shell command (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
 
 ### `:Newsh[!]`
 
-Open a new buffer with a shell command replacing the existing buffer.
+Open a new buffer in a new window containing the result of a shell command.
 
 ### `:Tabnewsh[!]`, `:Tabe[dit]sh[!]`
 
+Open a new buffer on a new tab page containing the result of a shell command.
+
 ### `:Vne[w]sh[!]`
 
-
-With a bang use the existing buffer
+Like `:Newsh[!]` but split vertically.
 
 ## `:P`
 
