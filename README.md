@@ -1,14 +1,12 @@
 # Partshell
 
-Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:GrepSh` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Grepsh rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Shgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Shgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
-One advantage of this approach it's flexibility. For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Grepsh pbpaste` Vim will parse `grep` output from the clipboard.
+One advantage of this approach it's flexibility. For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard.
 
-Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Grepsh!` won't automatically jump to the first match, just like `:grep!`.
+Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`.
 
-All the command also support the shortest version of the matching command in Vim, e.g., `:grep` is defined as `:gr[ep]`, so `:Grepsh` also supports `:Grsh`, in documentation this is illustrated by listing the command as `:Gr[ep]sh`.
-
-## `:Ar[gs]sh[!]`
+## `:Shargs[!]`
 
 Wrapper around `:args`.
 
@@ -16,7 +14,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### Example
 
-`:Argssh fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because the way `fd` works by default).
+`:Shargs fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because the way `fd` works by default).
 
 #### Built-In Alternative
 
@@ -24,13 +22,13 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ## Grep
 
-### `:Gr[ep]sh[!]`
+### `:Shgrep[!]`
 
 Run the builtin `:grep` command using the arguments as `grepprg`. This populates the quickfix list with the matching lines using `grepformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
-`:Grepsh rg --vimgrep partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
+`:Shgrep rg --vimgrep partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
 
 #### Built-In Alternative
 
@@ -50,7 +48,7 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 #### Example
 
-`:MakeSh clang %` compiles the current file with `clang`.
+`:Shmake clang %` compiles the current file with `clang`.
 
 #### Built-In Alternative
 
@@ -64,31 +62,31 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 Commands that create a new buffer containing the output of a shell command.
 
-The buffer will be named after the shell command, for example `Newsh git show` will create a buffer named `git show`. With a bang (`!`) the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`).
+The buffer will be named after the shell command, for example `Shnew git show` will create a buffer named `git show`. With a bang (`!`) the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`).
 
 ### Example
 
-`:Newsh git diff` to create a new diff buffer containing the output of `git diff`.
+`:Shnew git diff` to create a new diff buffer containing the output of `git diff`.
 
 ### Built-In Alternative
 
 `:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues `:new | 0r !git diff ^J norm Gddgg | filetype detect` should work but doesn't seem to in practice (`^J` means do `CTRL-V_CTRL-J` which is the command separator to use after a `:!` to perform a another Vim command instead of piping to a shell command).
 
-### `:Ene[w]sh[!]`
+### `:Shenew[!]`
 
 Open a new buffer containing the result of a shell command (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
 
-### `:Newsh[!]`
+### `:Shnew[!]`
 
 Open a new buffer in a new window containing the result of a shell command.
 
-### `:Tabnewsh[!]`, `:Tabe[dit]sh[!]`
+### `:Shtabnew[!]`, `:Shtabedit[!]`
 
 Open a new buffer on a new tab page containing the result of a shell command.
 
-### `:Vne[w]sh[!]`
+### `:Shvnew[!]`
 
-Like `:Newsh[!]` but split vertically.
+Like `:Shnew[!]` but split vertically.
 
 ## `:P`
 
