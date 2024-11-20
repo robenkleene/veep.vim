@@ -62,7 +62,9 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 ## New Window
 
-Commands that create a new window.
+Commands that create a new buffer containing the output of a shell command.
+
+The buffer will be named after the shell command, for example `Newsh git show` will create a buffer named `git show`. With a bang (`!`) the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`).
 
 ### Example
 
