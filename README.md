@@ -36,13 +36,13 @@ Run the builtin `:grep` command using the arguments as `grepprg`. This populates
 
 `:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
 
-### `:Lgr[ep]sh[!]`
+### `:Shlgrep[!]`
 
 The same as `:Grepsh` but populate the location list instead.
 
 ## Make
 
-### `:Mak[e]sh[!]`
+### `:Shmake[!]`
 
 Run the builtin `:make` command using the arguments as `makeprg`. This populates the quickfix list with the lines with errors using `errorformat`. With a bang (`!`), it doesn't automatically jump to the first match.
 
@@ -56,7 +56,7 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 `:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
-### `:Lmak[e]sh[!]`
+### `:Shlmake[!]`
 
 ## New Window
 
@@ -90,7 +90,16 @@ Like `:Shnew[!]` but split vertically.
 
 ## `:P`
 
-The special `:P` (for partial) command.
+`:P` stands for partial, it allows 
 
 - `:P !` example
-- The `:P` command started as a  `B` the [vis](https://www.vim.org/scripts/script.php?script_id=1195).
+
+### Example
+
+
+The `:P` command is a bit different than the other commands, because it works with other commands, in addition to shell commands (with is why it omits the `Sh` prefix the other commands have.
+
+The special `:P` (for partial) command.
+
+The inspiration for `:P`, as well as some implementation ideas, came from the `:B` in the [vis](https://www.vim.org/scripts/script.php?script_id=1195) plugin.
+
