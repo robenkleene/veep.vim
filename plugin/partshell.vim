@@ -13,10 +13,7 @@ command! -nargs=+ -bang -complete=shellcmd Shlmake call partshell#MakeSh(<bang>0
 
 " Splits
 command! -nargs=+ -bang -complete=shellcmd Shenew call partshell#Sh(<bang>0, <q-args>, 'enew')
-
 command! -nargs=+ -bang -complete=shellcmd Shnew call partshell#Sh(<bang>0, <q-args>, 'new')
-
 command! -nargs=+ -bang -complete=shellcmd Shtabnew call partshell#Sh(<bang>0, <q-args>, 'tabnew')
 command! -nargs=+ -bang -complete=shellcmd Shtabedit call partshell#Sh(<bang>0, <q-args>, 'tabnew')
-
 command! -nargs=+ -bang -complete=shellcmd Shvnew call partshell#Sh(<bang>0, <q-args>, 'vnew')
