@@ -1,4 +1,8 @@
 function! partshell#Part(...) range abort
+  if a:firstline == 0 && a:lastline == 0
+     echoerr "Warning: No range provided for P command."
+    return
+  endif
   let l:save = @@
 
   execute 'silent noautocmd keepjumps normal! gv'
