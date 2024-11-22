@@ -96,6 +96,7 @@ Like `:Shnew[!]` but split vertically.
 
 ### Example
 
+The `:P` command works with other commands, it takes a command (and that command's arguments) as its arguments, and then applies that command *to just the visual selection*. This is the same as 
 
 The `:P` command is a bit different than the other commands, because it works with other commands, in addition to shell commands (with is why it omits the `Sh` prefix the other commands have.
 
