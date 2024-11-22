@@ -94,9 +94,8 @@ Like `:Shnew[!]` but split vertically.
 
 - `:P !` example
 
-### Example
+The `:P` command works with other commands, it takes a command (and that command's arguments) as its arguments, and then applies that command *to just the visual selection*. This is the same as `'<,'><command>`, except that *only works on full lines*, Vim does not have a builtin way to apply a command to a selection consisting of partial lines. So if part of a line is selected with `v` or `CTRL-v`, Vim will still apply the command to the full line, whereas the `P` command will only apply command to the selected part of the line.
 
-The `:P` command works with other commands, it takes a command (and that command's arguments) as its arguments, and then applies that command *to just the visual selection*. This is the same as 
 
 The `:P` command is a bit different than the other commands, because it works with other commands, in addition to shell commands (with is why it omits the `Sh` prefix the other commands have.
 
@@ -104,3 +103,8 @@ The special `:P` (for partial) command.
 
 The inspiration for `:P`, as well as some implementation ideas, came from the `:B` in the [vis](https://www.vim.org/scripts/script.php?script_id=1195) plugin.
 
+### Example
+
+### Built-In Alternative
+
+Copy the selection to a new buffer, and apply the command there (this is also how `P` works internally).
