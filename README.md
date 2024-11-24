@@ -90,18 +90,15 @@ Like `:Shnew[!]` but split vertically.
 
 ## `:P`
 
-`:P` stands for partial, it allows it takes a command (and that command's arguments) as its arguments, and then applies that command *to just the visual selection*. This is similar to the builtin in range syntax, `'<,'><command>`, except it also works on partial lines, whereas the builtin *only works on full lines*. Vim does not have a builtin way to apply a command to a selection that consists of partial lines. So if part of a line is selected with `v` or `CTRL-v`, Vim will still apply the command to the full line, whereas the `P` command will only apply command to the selected part of the line.
+`:P` (stands for "partial") takes a command, and that command's arguments, as its arguments, and applies that command the visual selection. This is similar to the builtin support for running commands on a range, `'<,'><command>`, the builtin range support *only works on full lines*, whereas the `:P` command also works on visual selections consisting of partial lines. Vim does not have a builtin way to apply a command to a selection that consists of partial lines. So if part of a line is selected with `v` or `CTRL-v`, `'<,'><command>` will still apply the command to the full line, whereas the `:P` command will only apply command to the selected part of the line.
 
-- `:P !` example
+Using `:P !<shell-command>` will run a shell command on the visual selection.
 
-The `:P` command works with other commands,
-The `:P` command is a bit different than the other commands, because it works with other commands, in addition to shell commands (with is why it omits the `Sh` prefix the other commands have.
-
-The special `:P` (for partial) command.
-
-The inspiration for `:P`, as well as some implementation ideas, came from the `:B` in the [vis](https://www.vim.org/scripts/script.php?script_id=1195) plugin.
+The inspiration for `:P`, as well implementation ideas, came from the `:B` in the [vis](https://www.vim.org/scripts/script.php?script_id=1195) plugin.
 
 ### Example
+
+
 
 ### Built-In Alternative
 
