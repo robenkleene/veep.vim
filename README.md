@@ -96,6 +96,8 @@ Using `:P !<shell-command>` will run a shell command on the visual selection.
 
 The inspiration for `:P`, as well implementation ideas, came from the `:B` in the [vis](https://www.vim.org/scripts/script.php?script_id=1195) plugin.
 
+The command passed as an argument to `:P` must support ranges.
+
 ### Example
 
 
