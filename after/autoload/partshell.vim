@@ -37,13 +37,20 @@ function! partshell#Part(...) range abort
 endfunction
 
 function! partshell#EditSh(bang, cmd, edit) abort
-  let l:result = systemlist(a:cmd)
-  if v:shell_error != 0
-    echom "Non-zero exit status running ".a:cmd
-    return
-  endif
+  "let l:result = systemlist(a:cmd)
+  "if v:shell_error != 0
+  "  echom "Non-zero exit status running ".a:cmd
+  "  return
+  "endif
+  " This temptfile based approach is hack-y but being able to see the shell
+  " output makes it easier to diagnose errors and unexpected results
+  let l:tmpfile = tempname()
+  execute '!' . a:cmd . ' | tee ' . l:tmpfile
+  let l:exit_status = v:shell_error
+  let l:result = readfile(l:tmpfile)
+  call delete(l:tmpfile)
   if empty(l:result)
-    echom "No results found running ".a:cmd
+    "echom "No results found running ".a:cmd
     return
   endif
   let l:escaped_files = map(l:result, {_, v -> fnameescape(v)})
