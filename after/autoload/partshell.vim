@@ -46,6 +46,9 @@ function! partshell#EditSh(bang, cmd, edit) abort
   " output makes it easier to diagnose errors and unexpected results
   let l:tmpfile = tempname()
   execute '!' . a:cmd . ' | tee ' . l:tmpfile
+  if !filereadable(l:tmpfile)
+    return
+  endif
   let l:result = readfile(l:tmpfile)
   call delete(l:tmpfile)
   if empty(l:result)
