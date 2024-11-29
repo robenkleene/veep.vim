@@ -2,7 +2,14 @@
 
 Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Shgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Shgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
-One advantage of this approach it's flexibility. For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard.
+## Advantages
+
+A brief list of advantages over other approaches.
+
+1. **Flexibility.** For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard.
+2. **Repeatability.** Since this approach doesn't set any variables (like setting `grepprg`), and runs explicit commands like `:Shgrep fd partshell` (e.g., as opposed to fuzzy finders, which present a custom UI). It's easy to repeat or refine previous commands using Vim's command line history (e.g., by hitting up arrow).
+
+## Notes
 
 Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`.
 
