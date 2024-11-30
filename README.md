@@ -4,10 +4,10 @@ Partshell is a Vim plugin that adds helper commands for working with shell comma
 
 ## Advantages
 
-A brief list of advantages over other approaches.
+A couple of general advantages of the Partshell approach when compared to other existing solutions to the same problems:
 
-1. **Flexibility.** For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard.
-2. **Repeatability.** Since this approach doesn't set any variables (like setting `grepprg`), and runs explicit commands like `:Shgrep fd partshell` (e.g., as opposed to fuzzy finders, which present a custom UI). It's easy to repeat or refine previous commands using Vim's command line history (e.g., by hitting up arrow).
+1. **Flexibility:** For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard (e.g., the built-in `:grep` command with the `'grepprg'` variable make this more difficult).
+2. **Repeatability:** Since this approach only runs commands with arguments from the command line, like `:Shgrep fd partshell`, it's easy to repeat (or refine) previous commands using Vim's command line history by hitting up arrow (e.g., as opposed to fuzzy finders, which present a custom UI, if you want to re-open the same file you have to go through that UI every time).
 
 ## Notes
 
