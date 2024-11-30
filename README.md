@@ -31,7 +31,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### `:Shgrep[!]`
 
-Run the builtin `:grep` command using the arguments as `grepprg`. This populates the quickfix list with the matching lines using `grepformat`. With a bang (`!`), it doesn't automatically jump to the first match.
+Run the builtin `:grep` command using the arguments as `'grepprg'`. This populates the quickfix list with the matching lines using `'grepformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
@@ -39,9 +39,9 @@ Run the builtin `:grep` command using the arguments as `grepprg`. This populates
 
 #### Built-In Alternative
 
-`:set grepprg=rg\ --vimgrep | grep partshell` but that has the side effect of setting `grepprg` (which might be desirable! Setting `grepprg` to `rg` is a great alternative if the built-in `:grep` behavior isn't useful).
+`:set grepprg=rg\ --vimgrep | grep partshell` but that has the side effect of setting `'grepprg'` (which might be desirable! Setting `'grepprg'` to `rg` is a great alternative if the built-in `:grep` behavior isn't useful).
 
-`:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `errorformat` instead of `grepformat` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
+`:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `'errorformat'` instead of `'grepformat'` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
 
 ### `:Shlgrep[!]`
 
@@ -51,7 +51,7 @@ The same as `:Grepsh` but populate the location list instead.
 
 ### `:Shmake[!]`
 
-Run the builtin `:make` command using the arguments as `makeprg`. This populates the quickfix list with the lines with errors using `errorformat`. With a bang (`!`), it doesn't automatically jump to the first match.
+Run the builtin `:make` command using the arguments as `'makeprg'`. This populates the quickfix list with the lines with errors using `'errorformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
@@ -59,7 +59,7 @@ Run the builtin `:make` command using the arguments as `makeprg`. This populates
 
 #### Built-In Alternative
 
-`:set makeprg=clang\ % | make')` does not set `makeprg`.
+`:set makeprg=clang\ % | make')` does not set `'makeprg'`.
 
 `:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
