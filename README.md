@@ -31,7 +31,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### `:Shgrep[!]`
 
-Run the builtin `:grep` command using the arguments as `'grepprg'`. This populates the quickfix list with the matching lines using `'grepformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
+Run the arguments as a `grep` program, populating the quickfix list with the matching lines. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
@@ -45,13 +45,13 @@ Run the builtin `:grep` command using the arguments as `'grepprg'`. This populat
 
 ### `:Shlgrep[!]`
 
-The same as `:Grepsh` but populate the location list instead.
+The same as `:Shgrep` but populate the location list instead.
 
 ## Make
 
 ### `:Shmake[!]`
 
-Run the builtin `:make` command using the arguments as `'makeprg'`. This populates the quickfix list with the lines with errors using `'errorformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
+Run the arguments as a `make` program, populating the quickfix list with the lines with errors using `'errorformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
@@ -59,7 +59,7 @@ Run the builtin `:make` command using the arguments as `'makeprg'`. This populat
 
 #### Built-In Alternative
 
-`:set makeprg=clang\ % | make')` does not set `'makeprg'`.
+`:set makeprg=clang\ % | make`.
 
 `:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
