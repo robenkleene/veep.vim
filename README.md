@@ -45,7 +45,7 @@ Run the arguments as a `grep` program, populating the quickfix list with the mat
 
 ### `:Shlgrep[!]`
 
-The same as `:Shgrep` but populate the location list instead.
+The same as `:Shgrep` but populate the location list instead of the quickfix list.
 
 ## Make
 
@@ -65,6 +65,8 @@ Run the arguments as a `make` program, populating the quickfix list with the lin
 
 ### `:Shlmake[!]`
 
+The same as `:Shgrep` but populate the location list instead of the quickfix list.
+
 ## New Window
 
 Commands that create a new buffer containing the output of a shell command.
@@ -73,7 +75,7 @@ The buffer will be named after the shell command, for example `Shnew git show` w
 
 ### Example
 
-`:Shnew git diff` to create a new diff buffer containing the output of `git diff`.
+`:Shnew git diff` to create a new diff buffer named `git diff` containing the output of `git diff`.
 
 ### Built-In Alternative
 
