@@ -1,4 +1,4 @@
-command! -range -nargs=* -complete=command P silent <line1>,<line2>call partshell#Part(<q-args>)
+command! -range -nargs=* -complete=command P <line1>,<line2>call partshell#Part(<q-args>)
 
 " Args
 command! -nargs=+ -bang -complete=shellcmd Shargs call partshell#EditSh(<bang>0, <q-args>, 'args')

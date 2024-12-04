@@ -24,15 +24,13 @@ function! partshell#Part(...) range abort
     elseif l:mode == 'V'
       execute 'silent noautocmd keepjumps normal! ggVGy'
     elseif l:mode == "\<C-V>"
-      execute 'silent noautocmd keepjumps normal! gg<C-v>G$y'
+      execute 'silent noautocmd keepjumps normal! gg^vG$y'
     endif
-
     bd!
     execute 'silent noautocmd keepjumps normal! gvp'
-  else
-    let &l:undolevels=l:oldundolevels
   endif
 
+  let &l:undolevels=l:oldundolevels
   let @@ = l:save
 endfunction
 
