@@ -24,7 +24,8 @@ function! partshell#Part(...) range abort
     elseif l:mode == 'V'
       execute 'silent noautocmd keepjumps normal! ggVGy'
     elseif l:mode == "\<C-V>"
-      execute 'silent noautocmd keepjumps normal! gg^vG$y'
+      " Use `^V ^V` to insert the `^V` for the blockwise selection
+      execute 'silent noautocmd keepjumps normal! ggG$y'
     endif
     bd!
     execute 'silent noautocmd keepjumps normal! gvp'
