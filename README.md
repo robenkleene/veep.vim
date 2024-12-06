@@ -109,8 +109,18 @@ The command passed as an argument to `:P` must support ranges.
 
 ### Example
 
+Take this example of a Markdown table.
 
+```
+| Header 1     | Header 2     | Header 3     |
+|--------------|--------------|--------------|
+| Row 1 Cell 1 | Row 1 Cell 2 | Row 1 Cell 3 |
+| Row 2 Cell 1 | Row 2 Cell 2 | Row 2 Cell 3 |
+| Row 3 Cell 1 | Row 3 Cell 2 | Row 3 Cell 3 |
+```
+
+Use visual mode blockwise `<C-v>` to select `Header 3` rows 1-3, then try `P s/row/Row` to replace in only the selection. This also works using a shell comment, so `P !sed s/row/Row` will have the same result.
 
 ### Built-In Alternative
 
-Copy the selection to a new buffer, and apply the command there (this is also how `P` works internally).
+Copy the selection to a new buffer, and apply the command there (this is also how `P` works internally), then copy the text again from the new buffer (being careful to use the same visual mode that was used to initially select the text, if you don't do this, pasting back will sometimes insert line breaks), then go back to the original buffer and restore your visual selection (`gv`) then paste (`p`).
