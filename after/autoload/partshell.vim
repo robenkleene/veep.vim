@@ -1,6 +1,6 @@
 function! partshell#Part(...) range abort
   if a:firstline == 0 && a:lastline == 0
-     echoerr "Warning: No range provided for P command."
+    echoerr "Warning: No range provided for P command."
     return
   endif
   let l:save = @@
@@ -9,7 +9,7 @@ function! partshell#Part(...) range abort
   let l:mode = mode(1)
   execute 'silent noautocmd keepjumps normal! y'
   new
-  let l:oldundolevels=&undolevels
+  let l:oldundolevels = &undolevels
   setlocal undolevels=-1
 
   setlocal buftype=nofile bufhidden=hide noswapfile
@@ -17,22 +17,36 @@ function! partshell#Part(...) range abort
 
   if a:0 >= 1 && !empty(a:1)
     let l:cmd = a:1
-    execute 'silent noautocmd keepjumps 0,$'.l:cmd
+    let l:success = 1
+    let l:exception = ""
+    try
+      execute 'silent noautocmd keepjumps 0,$'.l:cmd
+    catch
+      let l:success = 0
+      let l:exception = v:exception
+    endtry
 
-    if l:mode == 'v'
-      execute 'silent noautocmd keepjumps normal! ggvGg_y'
-    elseif l:mode == 'V'
-      execute 'silent noautocmd keepjumps normal! ggVGy'
-    elseif l:mode == "\<C-V>"
-      " Use `^V ^V` to insert the `^V` for the blockwise selection
-      execute 'silent noautocmd keepjumps normal! ggG$y'
+    if l:success
+      if l:mode == 'v'
+        execute 'silent noautocmd keepjumps normal! ggvGg_y'
+      elseif l:mode == 'V'
+        execute 'silent noautocmd keepjumps normal! ggVGy'
+      elseif l:mode == "\<C-V>"
+        " Use `^V ^V` to insert the `^V` for the blockwise selection
+        execute 'silent noautocmd keepjumps normal! ggG$y'
+      endif
+      bd!
+      execute 'silent noautocmd keepjumps normal! gvp'
+    else
+      bd!
     endif
-    bd!
-    execute 'silent noautocmd keepjumps normal! gvp'
   endif
 
-  let &l:undolevels=l:oldundolevels
+  let &l:undolevels = l:oldundolevels
   let @@ = l:save
+  if !l:success
+    echoerr l:exception
+  endif
 endfunction
 
 function! partshell#EditSh(bang, cmd, edit) abort
