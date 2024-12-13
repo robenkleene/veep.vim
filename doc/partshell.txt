@@ -1,27 +1,13 @@
 *partshell.txt*    Partshell: Vim Plugin for Shell Commands
 
 ==============================================================================
-Introduction                                      *partshell-intro*
+Introduction                                      *partshell*
 ==============================================================================
 Partshell is a Vim plugin that adds helper commands for working with shell
 commands in Vim. For example, `:Shgrep` is an easy way to use any `grep`
 program, the same way Vim's builtin `:grep` command works. For example,
 `:Shgrep rg --vimgrep foo` will use `ripgrep`.
 
-==============================================================================
-Advantages                                       *partshell-advantages*
-==============================================================================
-A couple of general advantages of the Partshell approach:
-
-1. *Flexibility*: For example, `:Shgrep pbpaste` on macOS parses `grep` output
-   from the clipboard, which is harder with built-in options like `'grepprg'`.
-
-2. *Repeatability*: Since commands are run directly from the command line, you
-   can easily repeat or refine them using Vim's command line history.
-
-==============================================================================
-Notes                                            *partshell-notes*
-==============================================================================
 Adding a bang (`!`) mirrors the behavior of equivalent Vim built-in commands.
 For example, `:Shgrep!` won't automatically jump to the first match, just like
 `:grep!`.
@@ -45,12 +31,6 @@ Example:
 
 Uses `fd` to populate the argument list with files matching "partshell".
 
-Built-in alternative:
-
-    :args `fd partshell`
-
-Note: This doesn't handle filenames with spaces properly.
-
 ------------------------------------------------------------------------------
 Shgrep                                            *:Shgrep*
 ------------------------------------------------------------------------------
@@ -64,10 +44,6 @@ Example:
     :Shgrep rg --vimgrep partshell
 
 Uses `ripgrep` to populate the quickfix list with lines containing "partshell".
-
-Built-in alternative:
-
-    :set grepprg=rg\ --vimgrep | grep partshell
 
 ------------------------------------------------------------------------------
 Shlgrep                                           *:Shlgrep*
@@ -91,10 +67,6 @@ Example:
 
 Compiles the current file with `clang`.
 
-Built-in alternative:
-
-    :set makeprg=clang\ %
-
 ------------------------------------------------------------------------------
 Shnew                                             *:Shnew*
 ------------------------------------------------------------------------------
@@ -109,10 +81,6 @@ Example:
     :Shnew git diff
 
 Creates a new buffer named "git diff" with the output of the command.
-
-Built-in alternative:
-
-    :new | r !git diff
 
 ------------------------------------------------------------------------------
 P Command                                         *:P*
@@ -137,11 +105,6 @@ Use blockwise `<C-v>` to select "Header 3" in rows 1-3, then:
     :P s/row/Row
 
 This replaces "row" with "Row" in the selection.
-
-Built-in alternative:
-
-Copy the selection to a new buffer, run the command, copy the result, and paste
-it back.
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help
