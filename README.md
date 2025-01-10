@@ -107,6 +107,10 @@ The inspiration for `:P`, as well implementation ideas, came from the `:B` in th
 
 The command passed as an argument to `:P` must support ranges.
 
+### `:Psh`
+
+`:Psh` is shorthand for `P !` (i.e., run a shell command on the visual selection) that allows tab completion. (`P !<tab>` uses shell completion in Neovim, but it does not in Vim, so `Psh <tab>` can be used for shell completion in Vim.)
+
 ### Example
 
 Take this example of a Markdown table.
