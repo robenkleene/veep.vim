@@ -1,3 +1,5 @@
+vnoremap <expr> ! (mode() ==# 'V' ? '!' : ':Psh ')
+
 command! -range -nargs=* -complete=command P <line1>,<line2>call partshell#Part(<q-args>)
 " Doing `'<,'>P !` supports tab completion in Neovim but not in Vim, so this
 " helper command allows shell completion in Vim by using `'<,'>Psh`
