@@ -20,7 +20,7 @@ The following commands are provided by Partshell:
 ------------------------------------------------------------------------------
 Shargs                                            *:Shargs*
 ------------------------------------------------------------------------------
-`:Shargs[!]`
+`:Sha[rgs][!]`
 
 Populates the argument list with the result of a shell command. Each line is
 interpreted as a file path. A bang (`!`) modifies behavior as expected.
@@ -34,7 +34,7 @@ Uses `fd` to populate the argument list with files matching "partshell".
 ------------------------------------------------------------------------------
 Shgrep                                            *:Shgrep*
 ------------------------------------------------------------------------------
-`:Shgrep[!]`
+`:Shg[rep][!]`
 
 Runs a shell command as a `grep` program, populating the quickfix list with
 matching lines. With a bang (`!`), it won't jump to the first match.
@@ -48,7 +48,7 @@ Uses `ripgrep` to populate the quickfix list with lines containing "partshell".
 ------------------------------------------------------------------------------
 Shlgrep                                           *:Shlgrep*
 ------------------------------------------------------------------------------
-`:Shlgrep[!]`
+`:Shlg[rep][!]`
 
 The same as `:Shgrep`, but populates the location list instead of the quickfix
 list.
@@ -56,7 +56,7 @@ list.
 ------------------------------------------------------------------------------
 Shmake                                            *:Shmake*
 ------------------------------------------------------------------------------
-`:Shmake[!]`
+`:Shm[ake][!]`
 
 Runs a `make` program, populating the quickfix list with error lines. With a
 bang (`!`), it won't jump to the first match.
@@ -70,7 +70,7 @@ Compiles the current file with `clang`.
 ------------------------------------------------------------------------------
 Shnew                                             *:Shnew*
 ------------------------------------------------------------------------------
-`:Shnew[!]`
+`:Shn[ew][!]`
 
 Creates a new buffer with the output of a shell command. The buffer is named
 after the command. With a bang (`!`), the same buffer is reused for subsequent

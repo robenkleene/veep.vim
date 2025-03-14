@@ -13,7 +13,7 @@ A couple of general advantages of the Partshell approach when compared to other 
 
 Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`.
 
-## `:Shargs[!]`
+## `:Sha[rgs][!]`
 
 Wrapper around `:args`.
 
@@ -29,7 +29,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ## Grep
 
-### `:Shgrep[!]`
+### `:Shg[rep][!]`
 
 Run the arguments as a `grep` program, populating the quickfix list with the matching lines. With a bang (`!`), it doesn't automatically jump to the first match.
 
@@ -43,13 +43,13 @@ Run the arguments as a `grep` program, populating the quickfix list with the mat
 
 `:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `'errorformat'` instead of `'grepformat'` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
 
-### `:Shlgrep[!]`
+### `:Shlg[rep][!]`
 
 The same as `:Shgrep` but populate the location list instead of the quickfix list.
 
 ## Make
 
-### `:Shmake[!]`
+### `:Shm[ake][!]`
 
 Run the arguments as a `make` program, populating the quickfix list with the lines with errors using `'errorformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
 
@@ -63,7 +63,7 @@ Run the arguments as a `make` program, populating the quickfix list with the lin
 
 `:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
-### `:Shlmake[!]`
+### `:Shlm[ake][!]`
 
 The same as `:Shgrep` but populate the location list instead of the quickfix list.
 
@@ -81,21 +81,21 @@ The buffer will be named after the shell command, for example `Shnew git show` w
 
 `:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues `:new | 0r !git diff ^J norm Gddgg | filetype detect` should work but doesn't seem to in practice (`^J` means do `CTRL-V_CTRL-J` which is the command separator to use after a `:!` to perform a another Vim command instead of piping to a shell command).
 
-### `:Shenew[!]`
+### `:She[new][!]`
 
 Open a new buffer containing the result of a shell command (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
 
-### `:Shnew[!]`
+### `:Shn[ew][!]`
 
 Open a new buffer in a new window containing the result of a shell command.
 
-### `:Shtabnew[!]`, `:Shtabedit[!]`
+### `:Shtabn[ew][!]`, `:Shtabedit[!]`
 
 Open a new buffer on a new tab page containing the result of a shell command.
 
-### `:Shvnew[!]`
+### `:Shv[new][!]`
 
-Like `:Shnew[!]` but split vertically.
+Like `:Shn[ew][!]` but split vertically.
 
 ## `:P`
 
