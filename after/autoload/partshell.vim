@@ -27,7 +27,6 @@ function! partshell#Part(bang, cmd, split) range abort
   if !empty(a:cmd)
     let l:cmd = substitute(a:cmd, '\s%\(\s\|$\)', ' #\1', '')
     let l:success = 1
-    let l:exception = ""
     try
       if a:bang
         execute 'silent noautocmd keepjumps '.l:cmd
@@ -36,7 +35,7 @@ function! partshell#Part(bang, cmd, split) range abort
       endif
     catch
       let l:success = 0
-      let l:exception = v:exception
+      echoerr v:exception
     endtry
   endif
 
@@ -54,7 +53,6 @@ function! partshell#Part(bang, cmd, split) range abort
       execute 'silent noautocmd keepjumps normal! gvp'
     else
       bd!
-      echoerr l:exception
     endif
   else
     " If a new split is created, goto first line
