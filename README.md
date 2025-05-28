@@ -89,7 +89,7 @@ Open a new buffer containing the result of a shell command (like `:enew` this wi
 
 Open a new buffer in a new window containing the result of a shell command.
 
-### `:Shtabn[ew][!]`, `:Shtabedit[!]`
+### `:Shtabn[ew][!]`, `:Shtabe[dit][!]`
 
 Open a new buffer on a new tab page containing the result of a shell command.
 
@@ -112,6 +112,22 @@ The command passed as an argument to `:P` must support ranges.
 `:Psh` is shorthand for `P !` (i.e., run a shell command on the visual selection) that allows tab completion. (`P !<tab>` uses shell completion in Neovim, but it does not in Vim, so `Psh <tab>` can be used for shell completion in Vim.)
 
 Partshell binds `!` visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
+
+### `:Pn[ew][!]`
+
+Like `:P` but put the results in a new buffer.
+
+With a bang (`!`) omit the range to perform a command that doesn't take a range.
+
+Without an argument, just create a new buffer with the contents.
+
+### `:Pv[new][!]`
+
+Like `:Pnew` but put the results in a new vertical buffer.
+
+### `:Ptabn[ew][!]`, `:Ptabe[dit][!]`
+
+Like `:Pnew` but put the results in a new vertical buffer.
 
 ### Example
 
