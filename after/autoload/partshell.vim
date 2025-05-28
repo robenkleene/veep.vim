@@ -1,4 +1,4 @@
-function! partshell#Part(cmd, split) range abort
+function! partshell#Part(bang, cmd, split) range abort
   if a:firstline == 0 && a:lastline == 0
     echoerr "Warning: No range provided for P command."
     return
@@ -29,7 +29,11 @@ function! partshell#Part(cmd, split) range abort
     let l:success = 1
     let l:exception = ""
     try
-      execute 'silent noautocmd keepjumps 0,$'.l:cmd
+      if a:bang
+        execute 'silent noautocmd keepjumps '.l:cmd
+      else
+        execute 'silent noautocmd keepjumps 0,$'.l:cmd
+      endif
     catch
       let l:success = 0
       let l:exception = v:exception
