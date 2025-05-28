@@ -1,4 +1,4 @@
-function! partshell#Part(...) range abort
+function! partshell#Part(cmd, split) range abort
   if a:firstline == 0 && a:lastline == 0
     echoerr "Warning: No range provided for P command."
     return
@@ -8,15 +8,24 @@ function! partshell#Part(...) range abort
   execute 'silent noautocmd keepjumps normal! gv'
   let l:mode = mode(1)
   execute 'silent noautocmd keepjumps normal! y'
-  new
+  if empty(a:split)
+    new
+  else
+    execute a:split
+  endif
   let l:oldundolevels = &undolevels
   setlocal undolevels=-1
 
   setlocal buftype=nofile bufhidden=hide noswapfile
   execute 'silent noautocmd keepjumps normal! Vp'
 
-  if a:0 >= 1 && !empty(a:1)
-    let l:cmd = a:1
+  " `system(a:cmd)` does not support `%` for the current file, so instead we
+  " use `execute 'silent! 0r !'.l:cmd` below which supports `%`, but since
+  " it's a new window, we need to reference the previous file
+  " let l:result = system(a:cmd)
+  " Use previous file for inline ` % `, and ending `%$`
+  if !empty(a:cmd)
+    let l:cmd = substitute(a:cmd, '\s%\(\s\|$\)', ' #\1', '')
     let l:success = 1
     let l:exception = ""
     try
@@ -25,7 +34,9 @@ function! partshell#Part(...) range abort
       let l:success = 0
       let l:exception = v:exception
     endtry
+  endif
 
+  if empty(a:split)
     if l:success
       if l:mode == 'v'
         execute 'silent noautocmd keepjumps normal! ggvGg_y'
@@ -39,14 +50,15 @@ function! partshell#Part(...) range abort
       execute 'silent noautocmd keepjumps normal! gvp'
     else
       bd!
+      echoerr l:exception
     endif
+  else
+    " If a new split is created, goto first line
+    norm gg
   endif
 
   let &l:undolevels = l:oldundolevels
   let @@ = l:save
-  if !l:success
-    echoerr l:exception
-  endif
 endfunction
 
 function! partshell#EditSh(bang, cmd, edit) abort
