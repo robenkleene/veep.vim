@@ -9,6 +9,17 @@ A couple of general advantages of the Partshell approach when compared to other 
 1. **Flexibility:** For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard (e.g., the built-in `:grep` command with the `'grepprg'` variable make this more difficult).
 2. **Repeatability:** Since this approach only runs commands with arguments from the command line, like `:Shgrep fd partshell`, it's easy to repeat (or refine) previous commands using Vim's command line history by hitting up arrow (e.g., as opposed to fuzzy finders, which present a custom UI, if you want to re-open the same file you have to go through that UI every time).
 
+## Cheat Sheet
+
+- `:P <ex-command>`: Run an ex command but only use the visual selection, not the whole lines in the range (e.g., `:P sort` will sort a column selected with `C-v`, rather than all the lines in the range [`:sort` always sorts the whole lines in the range]).
+- `:Pn <ex-command>`, `:Pv <ex-command>`, `:Ptabe <ex-command>`: Like `P`, but put the result in a new horizontal split, vertical split, or a new tab.
+- `:Pn`, `:Pv`, `:Ptabe`: Omit the command to put the visual selection in a new horizontal split, vertical split, or a new tab.
+- `!`, `:P !`: Like `:P` but for shell commands, pipe the current selection through a shell command, but only use the visual selection, not the whole lines in the range.
+- `Shg rg foo`: Populate the quickfix list from an `rg` search.
+- `Sha fd foo`: Populate the argument list from an `fd` search.
+- `Shm make`: Run a compile command, populating the quickfix list with any errors.
+- `Shn git show`, `Shv git show`, `Shtabe get show`: Show the current `git` commit in a horizontal split, a vertical split, or a new tab.
+
 ## Notes
 
 Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`.
