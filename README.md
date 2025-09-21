@@ -142,7 +142,7 @@ Like `:Pnew` but put the results in a new vertical buffer.
 
 ### Example
 
-Take this example of a Markdown table.
+Take this example of a Markdown table:
 
 ```
 | Header 1     | Header 2     | Header 3     |
@@ -152,7 +152,17 @@ Take this example of a Markdown table.
 | Row 3 Cell 1 | Row 3 Cell 2 | Row 3 Cell 3 |
 ```
 
-Use visual mode blockwise `<C-v>` to select `Header 3` rows 1-3, then try `P s/row/Row` to replace in only the selection. This also works using a shell comment, so `P !sed s/row/Row` will have the same result.
+Use visual mode blockwise `<C-v>` to select `Header 3` rows 1-3, then try `P s/Row/Low` to replace in only the selection.
+
+Another example is just doing a replacement on part of a line:
+
+```
+Who put the bomp in the "bomp bah bomp bah bomp?"
+```
+
+To replace, selecting in the quotes, then using `P s/bomp/plomp/g`.
+
+The above examples also works using a shell comment, so `P !sed s/bomp/plomp/g` (or `Psh sed s/bomp/plomp/g` which uses the `Psh` command which provides shell completion in Vim) will have the same result.
 
 ### Built-In Alternative
 
