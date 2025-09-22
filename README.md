@@ -2,6 +2,12 @@
 
 Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Shgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Shgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
+## The Way of Partshell
+
+1. Don't build specific tools into your editor, instead leverage flexible functionality that can work with a myriad of tools.
+2. Don't build specific workflows into your editor, instead use efficient functionality that can be composed together to accomplish complex tasks.
+3. Minimize editing your config, instead to seek to freeze your config such that it supports our needs today and the needs of tomorrow.
+
 ## Advantages
 
 A couple of general advantages of the Partshell approach when compared to other existing solutions to the same problems:
