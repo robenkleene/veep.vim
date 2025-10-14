@@ -147,6 +147,12 @@ function! partshell#Sh(bang, cmd, split) abort
     enew
     bd#
   endif
+  execute 'silent! 0r !'.l:cmd
+  norm Gddgg
+  filetype detect
+  " Do naming after file type detect, this allows `ftplugin` to check
+  " `eval('@%')` to see if this buffer is backed by a file before adding a
+  " name
   for l:i in range(1, 9)
     " Wrap `file` in a try-catch to suppress errors if the name already exists
     " (The buffer will continue to show up as `[No Name]`)
@@ -157,8 +163,5 @@ function! partshell#Sh(bang, cmd, split) abort
     catch
     endtry
   endfor
-  execute 'silent! 0r !'.l:cmd
-  norm Gddgg
   let &l:undolevels=l:oldundolevels
-  filetype detect
 endfunction
