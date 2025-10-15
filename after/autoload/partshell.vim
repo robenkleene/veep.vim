@@ -163,5 +163,8 @@ function! partshell#Sh(bang, cmd, split) abort
     catch
     endtry
   endfor
+  if a:bang
+    setlocal buftype=nofile readonly nomodifiable
+  endif
   let &l:undolevels=l:oldundolevels
 endfunction

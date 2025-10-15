@@ -28,7 +28,7 @@ A couple of general advantages of the Partshell approach when compared to other 
 
 ## Notes
 
-Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`.
+Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`. The `Shn[ew]` family of commands implement different bang behavior (because the built-in `:new` does not support a bang).
 
 ## `:Sha[rgs][!]`
 
@@ -88,7 +88,7 @@ The same as `:Shgrep` but populate the location list instead of the quickfix lis
 
 Commands that create a new buffer containing the output of a shell command.
 
-The buffer will be named after the shell command, for example `Shnew git show` will create a buffer named `git show`. With a bang (`!`) the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`).
+The buffer will be named after the shell command, for example `Shnew git show` will create a buffer named `git show`. With a bang (`!`) the output will be read only (`setlocal buftype=nofile readonly nomodifiable`), won't prompt to save the buffer (e.g., `:qa` without a bang will still quit without saving the buffer) and the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`). These changes make `:shn!` more appropriate just as *a viewer* of shell output.
 
 ### Example
 
