@@ -4,12 +4,12 @@
 Introduction                                      *partshell*
 ==============================================================================
 Partshell is a Vim plugin that adds helper commands for working with shell
-commands in Vim. For example, `:Shgrep` is an easy way to use any `grep`
+commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep`
 program, the same way Vim's builtin `:grep` command works. For example,
-`:Shgrep rg --vimgrep foo` will use `ripgrep`.
+`:Pshgrep rg --vimgrep foo` will use `ripgrep`.
 
 Adding a bang (`!`) mirrors the behavior of equivalent Vim built-in commands.
-For example, `:Shgrep!` won't automatically jump to the first match, just like
+For example, `:Pshgrep!` won't automatically jump to the first match, just like
 `:grep!`.
 
 ==============================================================================
@@ -18,59 +18,59 @@ Commands                                         *partshell-commands*
 The following commands are provided by Partshell:
 
 ------------------------------------------------------------------------------
-Shargs                                            *:Shargs*
+Pshargs                                            *:Pshargs*
 ------------------------------------------------------------------------------
-`:Sha[rgs][!]`
+`:Psha[rgs][!]`
 
 Populates the argument list with the result of a shell command. Each line is
 interpreted as a file path. A bang (`!`) modifies behavior as expected.
 
 Example:
 
-    :Shargs fd partshell
+    :Pshargs fd partshell
 
 Uses `fd` to populate the argument list with files matching "partshell".
 
 ------------------------------------------------------------------------------
-Shgrep                                            *:Shgrep*
+Pshgrep                                            *:Pshgrep*
 ------------------------------------------------------------------------------
-`:Shg[rep][!]`
+`:Pshg[rep][!]`
 
 Runs a shell command as a `grep` program, populating the quickfix list with
 matching lines. With a bang (`!`), it won't jump to the first match.
 
 Example:
 
-    :Shgrep rg --vimgrep partshell
+    :Pshgrep rg --vimgrep partshell
 
 Uses `ripgrep` to populate the quickfix list with lines containing "partshell".
 
 ------------------------------------------------------------------------------
-Shlgrep                                           *:Shlgrep*
+Pshlgrep                                           *:Pshlgrep*
 ------------------------------------------------------------------------------
-`:Shlg[rep][!]`
+`:Pshlg[rep][!]`
 
-The same as `:Shgrep`, but populates the location list instead of the quickfix
+The same as `:Pshgrep`, but populates the location list instead of the quickfix
 list.
 
 ------------------------------------------------------------------------------
-Shmake                                            *:Shmake*
+Pshmake                                            *:Pshmake*
 ------------------------------------------------------------------------------
-`:Shm[ake][!]`
+`:Pshm[ake][!]`
 
 Runs a `make` program, populating the quickfix list with error lines. With a
 bang (`!`), it won't jump to the first match.
 
 Example:
 
-    :Shmake clang %
+    :Pshmake clang %
 
 Compiles the current file with `clang`.
 
 ------------------------------------------------------------------------------
-Shnew                                             *:Shnew*
+Pshnew                                             *:Pshnew*
 ------------------------------------------------------------------------------
-`:Shn[ew][!]`
+`:Pshn[ew][!]`
 
 Creates a new buffer with the output of a shell command. The buffer is named
 after the command. With a bang (`!`), the same buffer is reused for subsequent
@@ -78,7 +78,7 @@ runs.
 
 Example:
 
-    :Shnew git diff
+    :Pshnew git diff
 
 Creates a new buffer named "git diff" with the output of the command.
 

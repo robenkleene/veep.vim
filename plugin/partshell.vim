@@ -12,19 +12,19 @@ command! -range -bang -nargs=* -bang -complete=command Ptabedit call partshell#P
 command! -range -bang -nargs=* -bang -complete=command Pvnew call partshell#Part(<bang>0, <q-args>, 'vnew')
 
 " Args
-command! -nargs=+ -bang -complete=shellcmd Shargs call partshell#EditSh(<bang>0, <q-args>, 'args')
+command! -nargs=+ -bang -complete=shellcmd Pshargs call partshell#EditSh(<bang>0, <q-args>, 'args')
 
 " Grep
-command! -nargs=+ -bang -complete=shellcmd Shgrep call partshell#GrepSh(<bang>0, <q-args>, 0)
-command! -nargs=+ -bang -complete=shellcmd Shlgrep call partshell#GrepSh(<bang>0, <q-args>, 1)
+command! -nargs=+ -bang -complete=shellcmd Pshgrep call partshell#GrepSh(<bang>0, <q-args>, 0)
+command! -nargs=+ -bang -complete=shellcmd Pshlgrep call partshell#GrepSh(<bang>0, <q-args>, 1)
 
 " Make
-command! -nargs=+ -bang -complete=shellcmd Shmake call partshell#MakeSh(<bang>0, <q-args>, 0)
-command! -nargs=+ -bang -complete=shellcmd Shlmake call partshell#MakeSh(<bang>0, <q-args>, 1)
+command! -nargs=+ -bang -complete=shellcmd Pshmake call partshell#MakeSh(<bang>0, <q-args>, 0)
+command! -nargs=+ -bang -complete=shellcmd Pshlmake call partshell#MakeSh(<bang>0, <q-args>, 1)
 
 " Splits
-command! -nargs=+ -bang -complete=shellcmd Shenew call partshell#Sh(<bang>0, <q-args>, 'enew')
-command! -nargs=+ -bang -complete=shellcmd Shnew call partshell#Sh(<bang>0, <q-args>, 'new')
-command! -nargs=+ -bang -complete=shellcmd Shtabnew call partshell#Sh(<bang>0, <q-args>, 'tabnew')
-command! -nargs=+ -bang -complete=shellcmd Shtabedit call partshell#Sh(<bang>0, <q-args>, 'tabnew')
-command! -nargs=+ -bang -complete=shellcmd Shvnew call partshell#Sh(<bang>0, <q-args>, 'vnew')
+command! -nargs=+ -bang -complete=shellcmd Pshenew call partshell#Sh(<bang>0, <q-args>, 'enew')
+command! -nargs=+ -bang -complete=shellcmd Pshnew call partshell#Sh(<bang>0, <q-args>, 'new')
+command! -nargs=+ -bang -complete=shellcmd Pshtabnew call partshell#Sh(<bang>0, <q-args>, 'tabnew')
+command! -nargs=+ -bang -complete=shellcmd Pshtabedit call partshell#Sh(<bang>0, <q-args>, 'tabnew')
+command! -nargs=+ -bang -complete=shellcmd Pshvnew call partshell#Sh(<bang>0, <q-args>, 'vnew')

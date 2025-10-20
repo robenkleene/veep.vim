@@ -1,6 +1,6 @@
 # Partshell
 
-Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Shgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Shgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
 ## The Way of Partshell
 
@@ -12,8 +12,8 @@ Partshell is a Vim plugin that adds helper commands for working with shell comma
 
 A couple of general advantages of the Partshell approach when compared to other existing solutions to the same problems:
 
-1. **Flexibility:** For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Shgrep pbpaste` Vim will parse `grep` output from the clipboard (e.g., the built-in `:grep` command with the `'grepprg'` variable make this more difficult).
-2. **Repeatability:** Since this approach only runs commands with arguments from the command line, like `:Shgrep fd partshell`, it's easy to repeat (or refine) previous commands using Vim's command line history by hitting up arrow (e.g., as opposed to fuzzy finders, which present a custom UI, if you want to re-open the same file you have to go through that UI every time).
+1. **Flexibility:** For example, [`pbpaste`](https://ss64.com/mac/pbpaste.html) on macOS outputs the clipboard contents, so with `:Pshgrep pbpaste` Vim will parse `grep` output from the clipboard (e.g., the built-in `:grep` command with the `'grepprg'` variable make this more difficult).
+2. **Repeatability:** Since this approach only runs commands with arguments from the command line, like `:Pshgrep fd partshell`, it's easy to repeat (or refine) previous commands using Vim's command line history by hitting up arrow (e.g., as opposed to fuzzy finders, which present a custom UI, if you want to re-open the same file you have to go through that UI every time).
 
 ## Cheat Sheet
 
@@ -21,16 +21,16 @@ A couple of general advantages of the Partshell approach when compared to other 
 - `:Pn <ex-command>`, `:Pv <ex-command>`, `:Ptabe <ex-command>`: Like `P`, but put the result in a new horizontal split, vertical split, or a new tab.
 - `:Pn`, `:Pv`, `:Ptabe`: Omit the command to put the visual selection in a new horizontal split, vertical split, or a new tab.
 - `!`, `:P !`: Like `:P` but for shell commands, pipe the current selection through a shell command, but only use the visual selection, not the whole lines in the range.
-- `Shg rg foo`: Populate the quickfix list from an `rg` search.
-- `Sha fd foo`: Populate the argument list from an `fd` search.
-- `Shm make`: Run a compile command, populating the quickfix list with any errors.
-- `Shn git show`, `Shv git show`, `Shtabe get show`: Show the current `git` commit in a horizontal split, a vertical split, or a new tab.
+- `Pshg rg foo`: Populate the quickfix list from an `rg` search.
+- `Psha fd foo`: Populate the argument list from an `fd` search.
+- `Pshm make`: Run a compile command, populating the quickfix list with any errors.
+- `Pshn git show`, `Pshv git show`, `Pshtabe git show`: Show the current `git` commit in a horizontal split, a vertical split, or a new tab.
 
 ## Notes
 
-Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Shgrep!` won't automatically jump to the first match, just like `:grep!`. The `Shn[ew]` family of commands implement different bang behavior (because the built-in `:new` does not support a bang).
+Adding a bang (`!`), does the same behavior as the equivalent Vim built-in command (when the internal command supports one). For example, `:Pshgrep!` won't automatically jump to the first match, just like `:grep!`. The `Pshn[ew]` family of commands implement different bang behavior (because the built-in `:new` does not support a bang).
 
-## `:Sha[rgs][!]`
+## `:Psha[rgs][!]`
 
 Wrapper around `:args`.
 
@@ -38,7 +38,7 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ### Example
 
-`:Shargs fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because the way `fd` works by default).
+`:Pshargs fd partshell` uses [`fd`](https://github.com/sharkdp/fd) to populate the argument list with all the files with `partshell` in the name (recursively from the current directory, because the way `fd` works by default).
 
 #### Built-In Alternative
 
@@ -46,13 +46,13 @@ Populates the argument list with the result of a shell command. Each line is int
 
 ## Grep
 
-### `:Shg[rep][!]`
+### `:Pshg[rep][!]`
 
 Run the arguments as a `grep` program, populating the quickfix list with the matching lines. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
-`:Shgrep rg --vimgrep partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
+`:Pshgrep rg --vimgrep partshell` uses [ripgrep](https://github.com/BurntSushi/ripgrep) to populate the quickfix list with all the lines that contain `partshell` (recursively from the current directory, because the way `rg` works by default).
 
 #### Built-In Alternative
 
@@ -60,19 +60,19 @@ Run the arguments as a `grep` program, populating the quickfix list with the mat
 
 `:cexpr system('rg --vimgrep partshell')` will also likely work, although technically this uses `'errorformat'` instead of `'grepformat'` to parse matching lines (note that `%`, which can usually be used on the command line to reference the current file, will not work in this context).
 
-### `:Shlg[rep][!]`
+### `:Pshlg[rep][!]`
 
-The same as `:Shgrep` but populate the location list instead of the quickfix list.
+The same as `:Pshgrep` but populate the location list instead of the quickfix list.
 
 ## Make
 
-### `:Shm[ake][!]`
+### `:Pshm[ake][!]`
 
 Run the arguments as a `make` program, populating the quickfix list with the lines with errors using `'errorformat'`. With a bang (`!`), it doesn't automatically jump to the first match.
 
 #### Example
 
-`:Shmake clang %` compiles the current file with `clang`.
+`:Pshmake clang %` compiles the current file with `clang`.
 
 #### Built-In Alternative
 
@@ -80,39 +80,39 @@ Run the arguments as a `make` program, populating the quickfix list with the lin
 
 `:cexpr system('clang hello_world.c')` will also work (although `%` to reference the current file will not work in this context).
 
-### `:Shlm[ake][!]`
+### `:Pshlm[ake][!]`
 
-The same as `:Shgrep` but populate the location list instead of the quickfix list.
+The same as `:Pshgrep` but populate the location list instead of the quickfix list.
 
 ## New Window
 
 Commands that create a new buffer containing the output of a shell command.
 
-The buffer will be named after the shell command, for example `Shnew git show` will create a buffer named `git show`. With a bang (`!`) the output will be read only (`setlocal buftype=nofile readonly nomodifiable`), won't prompt to save the buffer (e.g., `:qa` without a bang will still quit without saving the buffer) and the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`). These changes make `:shn!` more appropriate just as *a viewer* of shell output.
+The buffer will be named after the shell command, for example `Pshnew git show` will create a buffer named `git show`. With a bang (`!`) the output will be read only (`setlocal buftype=nofile readonly nomodifiable`), won't prompt to save the buffer (e.g., `:qa` without a bang will still quit without saving the buffer) and the same buffer will be re-used for subsequent runs (without a bang, a new buffer will be created appending a number to the end, e.g., `git show 2`). These changes make `:shn!` more appropriate just as *a viewer* of shell output.
 
 ### Example
 
-`:Shnew git diff` to create a new diff buffer named `git diff` containing the output of `git diff`.
+`:Pshnew git diff` to create a new diff buffer named `git diff` containing the output of `git diff`.
 
 ### Built-In Alternative
 
 `:new | r !git diff` but this adds an extra new line at the top and bottom of the output, and doesn't detect the file type. To solve these issues `:new | 0r !git diff ^J norm Gddgg | filetype detect` should work but doesn't seem to in practice (`^J` means do `CTRL-V_CTRL-J` which is the command separator to use after a `:!` to perform a another Vim command instead of piping to a shell command).
 
-### `:She[new][!]`
+### `:Pshe[new][!]`
 
 Open a new buffer containing the result of a shell command (like `:enew` this will fail unless unless `'hidden'` is set or `'autowriteall'` is set and the file can be written).
 
-### `:Shn[ew][!]`
+### `:Pshn[ew][!]`
 
 Open a new buffer in a new window containing the result of a shell command.
 
-### `:Shtabn[ew][!]`, `:Shtabe[dit][!]`
+### `:Pshtabn[ew][!]`, `:Pshtabe[dit][!]`
 
 Open a new buffer on a new tab page containing the result of a shell command.
 
-### `:Shv[new][!]`
+### `:Pshv[new][!]`
 
-Like `:Shn[ew][!]` but split vertically.
+Like `:Pshn[ew][!]` but split vertically.
 
 ## `:P`
 
