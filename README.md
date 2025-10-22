@@ -1,6 +1,6 @@
-# Partshell
+# Veep
 
-Partshell is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Veep is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
 All of the commands start with `P` which stands for "pipe", because all the Veep commands take a range that acts like a pipe (`|`) on the shell.
 
@@ -25,7 +25,7 @@ The command passed as an argument to `:P` must support ranges.
 
 `:Psh` is shorthand for `P !` (i.e., run a shell command on the visual selection) that allows tab completion. (`P !<tab>` uses shell completion in Neovim, but it does not in Vim, so `Psh <tab>` can be used for shell completion in Vim.)
 
-Partshell binds `!` visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
+Veep binds `!` visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
 
 ### `:Pn[ew][!]`
 
