@@ -134,7 +134,7 @@ Partshell binds `!` visual mode to use `:Psh` if there's a character-wise (`v`) 
 
 Like `:P` but put the results in a new buffer.
 
-With a bang (`!`) omit the range to perform a command that doesn't take a range.
+With a bang (`!`) omit the range to perform a normal mode command that doesn't take a range.
 
 Without an argument, just create a new buffer with the contents.
 
