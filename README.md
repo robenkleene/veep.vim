@@ -1,6 +1,6 @@
 # Veep
 
-Veep is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Veep ("V" for visual selection because all the commands require a range [that's usually set by a visual selection], and "P" for pipe, because all the commands act like a shell pipe taking the visual selection as input) is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
 
 All of the commands start with `P` which stands for "pipe", because all the Veep commands take a range that acts like a pipe (`|`) on the shell.
 
