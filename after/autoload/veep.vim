@@ -1,6 +1,6 @@
 function! veep#Part(bang, cmd, split) range abort
   if a:firstline == 0 && a:lastline == 0
-    echoerr "Warning: No range provided for P command."
+    echohl ErrorMsg | echomsg "Warning: No range provided for P command." | echohl None
     return
   endif
   let l:save = @@
