@@ -19,13 +19,9 @@ function! veep#Part(bang, cmd, split) range abort
   setlocal buftype=nofile bufhidden=hide noswapfile
   execute 'silent noautocmd keepjumps normal! Vp'
 
-  " `system(a:cmd)` does not support `%` for the current file, so instead we
-  " use `execute 'silent! 0r !'.l:cmd` below which supports `%`, but since
-  " it's a new window, we need to reference the previous file
-  " let l:result = system(a:cmd)
-  " Use previous file for inline ` % `, and ending `%$`
   if !empty(a:cmd)
-    let l:cmd = substitute(a:cmd, '\s%\(\s\|$\)', ' #\1', '')
+    " Support `%` and `#`
+    let l:cmd = expandcmd(a:cmd)
     let l:success = 1
     try
       if a:bang
