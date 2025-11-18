@@ -1,8 +1,27 @@
 # Veep
 
-Veep ("V" for visual selection because all the commands require a range [that's usually set by a visual selection], and "P" for pipe, because all the commands act like a shell pipe taking the visual selection as input) is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Veep is an updated version of the [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195). Veep (for "visual pipe") focuses around the `:B` command from `vis.vim`, renaming it to `:P` (for pipe). `:P` takes an Ex command (i.e., what's typed at the [Vim command-line](https://vimhelp.org/cmdline.txt.html) after `:`) and applies it to the visual selection. Ex commands are named after the [Ex](https://en.wikipedia.org/wiki/Ex_(text_editor)) editor, which was a [line editor](https://en.wikipedia.org/wiki/Line_editor), which is a type of text editor that edits lines of text one at a time (Vim's predecessor, [Vi](https://en.wikipedia.org/wiki/Vi_(text_editor))
+
+
+
+There's a maintained version here https://github.com/navicore/vis.vim
+
+Veep started as a personal fork with slightly different whitespace handling than the original, but over time has been iterated enough to release separately
+
+Veep is a plugin for operating on part of lines with `ex` commands. 
+The main differences with `Veep`:
+
+
+
+
+Veep is a new https://www.vim.org/scripts/script.php?script_id=1195
+
+Veep ("V" for visual selection because all the commands require a range [that's usually set by a visual selection], and "P" for pipe, because all the commands act like a shell pipe taking the visual selection as input) is a Vim plugin that adds helper commands for working with shell commands in Vim.
+
 
 All of the commands start with `P` which stands for "pipe", because all the Veep commands take a range that acts like a pipe (`|`) on the shell.
+
+
 
 ## Examples
 
