@@ -1,8 +1,14 @@
 # Veep
 
-Veep is an updated version of the [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195). Veep (for "visual pipe") focuses around the `:B` command from `vis.vim`, renaming it to `:P` (for pipe). `:P` takes an Ex command (i.e., what's typed at the [Vim command-line](https://vimhelp.org/cmdline.txt.html) after `:`) and applies it to the visual selection. Ex commands are named after the [Ex](https://en.wikipedia.org/wiki/Ex_(text_editor)) editor, which was a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)), which is a type of text editor that edits lines of text one at a time (Vim's predecessor, [Vi](https://en.wikipedia.org/wiki/Vi_(text_editor) is named such as a *vi*sual editor for running Ex commands, visual in this sense means it shows the entire text buffer at once [line editors do not show the entire text buffer, e.g., to show a line in `ed` would `5n` will move to line five and then print it's contents).
+Veep is an update to [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195). Veep (for "visual pipe") focuses around the `:B` command from `vis.vim`, renaming it to `:P` (for pipe). `:P` takes an Ex command (i.e., what's typed at the [Vim command-line](https://vimhelp.org/cmdline.txt.html) after `:`) as an argument and applies it to the *visual selection*.
 
+Ex commands, named after the [Ex](https://en.wikipedia.org/wiki/Ex_(text_editor)) editor, which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)). A line editor a type of text editor that edits lines of text one at a time ([Vi](https://en.wikipedia.org/wiki/Vi_(text_editor), Vim's predecessor, is named such for *vi*sual editor, "visual" here means it shows the text buffer, whereas line editors do not show the text buffer. Instead, line editors use commands to display lines, e.g., `5n` moves to line five and then prints the contents of that line).
 
+This is all a long-winded way of explaining why Vim's Ex commands *operate on whole lines*, and what the value Veep and `vis.vim` provide, which is allowing Ex commands to *operate on a visual selection*. A visual selection in Vim can be either be [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (e.g., with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual).
+
+Veep and `vis.vim` both use the same approach to facilitate operating on visual selections with Ex commands, what the plugin does is yank the contents of the visual selection to a new buffer, then apply the Ex command to the contents of the new buffer, then copy the changed contents of the new buffer, and paste back over the original selection. This approach proves to be surprisingly robust usually doing what you want.
+
+The history of this trick can be found by tracing back through from the `vis.vim` to give credit to the inspiration.
 
 There's a maintained version here https://github.com/navicore/vis.vim
 
@@ -11,8 +17,10 @@ Veep started as a personal fork with slightly different whitespace handling than
 Veep is a plugin for operating on part of lines with `ex` commands. 
 The main differences with `Veep`:
 
+The [version created by Charles Campbell on vim.org](https://www.vim.org/scripts/script.php?script_id=1195), links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc."
 
 
+Veep itself started as a fork of `vis.vim` to change whitespace behavior
 
 Veep is a new https://www.vim.org/scripts/script.php?script_id=1195
 
