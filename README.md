@@ -18,12 +18,14 @@ Veep is an update to `vis.vim`, and owes it's implementation to the clever trick
 
 The history of this clever trick can traced back by checking the sources. [The version of `vis.vim` available on vim.org](https://www.vim.org/scripts/script.php?script_id=1195) links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back: "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc." The name "vis" is probably for visual (as in a visual selection) and the `:B` command `vis.vim` uses is probably for "block" (Dr. Chip's description "Performs an Ex command on a ctrl-v highlighted block. I often use it to target substitutes onto just a visual-block selection."
 
+Veep started out as a fork of `vis.vim` with minor changes to how whitespace is handled, but more changes evolved overtime to warrant a separate release.
+
 ## Veep vs. `vis.vim`
 
-The main changes Veep makes from `vis.vim`:
+The main differences between Veep and `vis.vim`:
 
-- Uses `:P` instead of `:B`  .
-- Adds the `:Psh` command to provide shell completion (`:P` takes an Ex command so it uses Ex command completion).
+- Uses `:P` (for "pipe") instead of `:B` (for "block").
+- Adds the `:Psh` command to provide shell completion (`:P` takes an Ex command so it uses Ex command completion instead of shell completion [strangely, `:P !<command>` in Neovim will actually use shell completion, but not Vim]).
 - Binds `!` in visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
 - Includes the `:Pnew`, `:Pvnew`, `Penew`, and `tabedit` family of commands that put the result in a new buffer instead of replacing the visual selection.
 
@@ -76,7 +78,7 @@ Take this example of a Markdown table:
 | Row 3 Cell 1 | Row 3 Cell 2 | Row 3 Cell 3 |
 ```
 
-Use visual mode blockwise `<C-v>` to select `Header 3` rows 1-3, then try `P s/Row/Low` to replace in only the selection.
+Use visual mode block-wise `<C-v>` to select `Header 3` rows 1-3, then try `P s/Row/Low` to replace in only the selection.
 
 Another example is just doing a replacement on part of a line:
 
