@@ -2,11 +2,11 @@
 
 Veep ("V" for visual and "P" for pipe) is an update to [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195), a Vim plugin for operating on *parts* of lines with Ex commands. 
 
-For example, `:P sort` can sort a column of text, and `:Psh rev` can reverse on a part of a line.
+For example, `:P sort` can sort a *column* of text, and `:Psh rev` can run the shell command `rev` on *part* of a line.
 
 ## A Brief History of Ex Commands
 
-Ex commands, named after the [Ex](https://en.wikipedia.org/wiki/Ex_(text_editor)) editor, which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)). A line editor a type of text editor that edits lines of text one at a time ([Vi](https://en.wikipedia.org/wiki/Vi_(text_editor), Vim's predecessor, is named such for *vi*sual editor, "visual" here means it shows the text buffer, whereas line editors do not show the text buffer. Instead, line editors use commands to display lines, e.g., `5n` moves to line five and then prints the contents of that line).
+Ex commands are named after the [Ex editor](https://en.wikipedia.org/wiki/Ex_(text_editor)) which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)). A line editor is a text editor that edits lines of text one at a time. Vim's predecessor ([Vi](https://en.wikipedia.org/wiki/Vi_(text_editor) is named such after the `visual` command in Ex that switched to it's full screen editing mode. The full screen editing mode means it the contents of a buffer full screen. In a line editor, the contents of the buffer isn't displayed by default, instead commands would display the contents of lines (e.g., `5n` in `ed` means move to line five and print the contents of that line).
 
 This is all to explain why Vim's Ex commands *only operate on whole lines*, and what the value Veep, which is allowing Ex commands to *operate on any visual selection*. In addition to [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) (with `V`), a visual selection in Vim can also be either [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`). Veep allows Ex commands to also work with the latter two.
 
