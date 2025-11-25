@@ -8,19 +8,21 @@ For example, `:P sort` can sort a *column* of text, and `:Psh rev` can run the s
 
 Ex commands are named after the [Ex editor](https://en.wikipedia.org/wiki/Ex_(text_editor)) which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)). A line editor is a text editor that edits lines of text one at a time. Vim's predecessor ([Vi](https://en.wikipedia.org/wiki/Vi_(text_editor) is named such after the `visual` command in Ex that switched to it's full screen editing mode. The full screen editing mode means it the contents of a buffer full screen. In a line editor, the contents of the buffer isn't displayed by default, instead commands would display the contents of lines (e.g., `5n` in `ed` means move to line five and print the contents of that line).
 
-This is all to explain why Vim's Ex commands *only operate on whole lines*, and what the value Veep, which is allowing Ex commands to *operate on any visual selection*. In addition to [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) (with `V`), a visual selection in Vim can also be either [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`). Veep allows Ex commands to also work with the latter two.
+Vi, and later Vim, have evolved a lot since, but this is the historical reason that Ex commands *only operate on whole lines*, that those commands were designed for an editor where operating on lines of text was the primary mode of operation, and, e.g., concepts like a selection, that could include part of a line, or a rectangular selection that spans part of multiple lines.
 
-## `vis.vim`
+This is where plugins like `vis.vim` and Veep come in. These plugins allow Ex commands to *operate on any visual selection*, e.g., a [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`). (Vim also has [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) selections [with `V`], which already work seamlessly with Ex commands.)
 
-Veep is an update to `vis.vim`, and owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection to a new buffer, then apply the Ex command to the contents of the new buffer, then copy the changed contents of the new buffer, and paste back over the original selection. An approach that proves to be surprisingly robust in usually doing what you want.
+## Veep is Update to `vis.vim`
 
-The history of this trick can be found by tracing back through from the `vis.vim` to give credit to the inspiration. The [version created by Charles Campbell on vim.org](https://www.vim.org/scripts/script.php?script_id=1195), links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc."
+Veep is an update to `vis.vim`, and owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection and pasting it to a new buffer, then applying the Ex command to the contents of the new buffer, then copying the changed contents of the new buffer, and pasting it back over the original selection, an approach that proves (surprisingly) robust.
+
+The history of this clever trick can traced back by checking the sources. [The version of `vis.vim` available on vim.org](https://www.vim.org/scripts/script.php?script_id=1195) links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back: "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc." The name "vis" is probably for visual (as in a visual selection) and the `:B` command `vis.vim` uses is probably for "block" (Dr. Chip's description "Performs an Ex command on a ctrl-v highlighted block. I often use it to target substitutes onto just a visual-block selection."
 
 ## Veep vs. `vis.vim`
 
 The main changes Veep makes from `vis.vim`:
 
-- Uses `:P` instead of `:B`.
+- Uses `:P` instead of `:B`  .
 - Adds the `:Psh` command to provide shell completion (`:P` takes an Ex command so it uses Ex command completion).
 - Binds `!` in visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
 - Includes the `:Pnew`, `:Pvnew`, `Penew`, and `tabedit` family of commands that put the result in a new buffer instead of replacing the visual selection.
