@@ -2,15 +2,19 @@
 
 Veep ("V" for visual and "P" for pipe) is an update to [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195), a Vim plugin for operating on *parts* of lines with Ex commands. 
 
-For example, `:P sort` can sort a *column* of text, and `:Psh rev` can run the shell command `rev` on *part* of a line.
+For example, `:P sort` with a blockswise visual selection (e.g., with `<C-v>`) will sort a *column* of text, and `:Psh rev` with a characterwise visual selection will run the shell command `rev` on *part* of a line.
 
-## A Brief History of Ex Commands
+## Why Is This Plugin Necessary?
+
+The problem that this plugin solves is that Ex commands operate on *a range of lines*, which means that cannot operate on *just part of each line* in a selection.
+
+A common way to use Ex commands is to create a visual selection, and then hit `:` to enter Vim's command line. If there's a visual selection, then Vim will automatically add `'<,'>` after the `:`, Vim's command line code for representing the current visual selection. Vim will enter `'<,'>`, regardless of whether a selection is [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`), or [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) selections (with `V`). But `'<,'>` only matches the visual selection when the selection is linewise. This is where plugins like `vis.vim` and Veep come in. These plugins allow Ex commands to *operate on any visual selection*.
+
+### A Brief History of Ex Commands
 
 Ex commands are named after the [Ex editor](https://en.wikipedia.org/wiki/Ex_(text_editor)) which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)). A line editor is a text editor that edits lines of text one at a time. Vim's predecessor ([Vi](https://en.wikipedia.org/wiki/Vi_(text_editor) is named such after the `visual` command in Ex that switched to it's full screen editing mode. The full screen editing mode means it the contents of a buffer full screen. In a line editor, the contents of the buffer isn't displayed by default, instead commands would display the contents of lines (e.g., `5n` in `ed` means move to line five and print the contents of that line).
 
 Vi, and later Vim, have evolved a lot since, but this is the historical reason that Ex commands *only operate on whole lines*, that those commands were designed for an editor where operating on lines of text was the primary mode of operation, and, e.g., concepts like a selection, that could include part of a line, or a rectangular selection that spans part of multiple lines.
-
-This is where plugins like `vis.vim` and Veep come in. These plugins allow Ex commands to *operate on any visual selection*, e.g., a [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`). (Vim also has [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) selections [with `V`], which already work seamlessly with Ex commands.)
 
 ## Veep is Update to `vis.vim`
 
