@@ -1,25 +1,52 @@
 # Veep
 
-Veep ("V" for visual selection because all the commands require a range [that's usually set by a visual selection], and "P" for pipe, because all the commands act like a shell pipe taking the visual selection as input) is a Vim plugin that adds helper commands for working with shell commands in Vim. For example, `:Pshgrep` is an easy way to use any `grep` program, the same way Vim's builtin `:grep` command works. For example, `:Pshgrep rg --vimgrep foo` will use [`ripgrep`](https://github.com/BurntSushi/ripgrep).
+Veep ("V" for visual and "P" for pipe) is an update to [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195), a Vim plugin for operating on *parts* of lines with Ex commands. 
 
-All of the commands start with `P` which stands for "pipe", because all the Veep commands take a range that acts like a pipe (`|`) on the shell.
+For example, `:P sort` with a blockswise visual selection (e.g., with `<C-v>`) will sort a *column* of text, and `:Psh rev` with a characterwise visual selection will reverse *part* of a line using the `rev` shell command.
 
-## Examples
+## Why Is This Plugin Necessary?
+
+The problem that this plugin solves is that Ex commands operate on *a range of lines*, which means that cannot operate on *just part of each line* in a selection.
+
+A common way to use Ex commands is to create a visual selection, and then hit `:` to enter Vim's command line. If there's a visual selection, then Vim will automatically add `'<,'>` after the `:`, Vim's command line code for representing the current visual selection. Vim will enter `'<,'>`, regardless of whether a selection is [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`), or [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) selections (with `V`). But `'<,'>` only matches the visual selection when the selection is linewise. This is where plugins like `vis.vim` and Veep come in. These plugins allow Ex commands to *operate on any visual selection*.
+
+### A Brief History of Ex Commands
+
+Ex commands are named after the [Ex editor](https://en.wikipedia.org/wiki/Ex_(text_editor)) which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like [ed](https://en.wikipedia.org/wiki/Ed_(software)). A line editor is a text editor that edits lines of text one at a time. Vim's predecessor ([Vi](https://en.wikipedia.org/wiki/Vi_(text_editor) is named such after the `visual` command in Ex that switched to it's full screen editing mode. The full screen editing mode means it the contents of a buffer full screen. In a line editor, the contents of the buffer isn't displayed by default, instead commands would display the contents of lines (e.g., `5n` in `ed` means move to line five and print the contents of that line).
+
+Vi, and later Vim, have evolved a lot since, but this is the historical reason that Ex commands *only operate on whole lines*, that those commands were designed for an editor where operating on lines of text was the primary mode of operation, and, e.g., concepts like a selection, that could include part of a line, or a rectangular selection that spans part of multiple lines.
+
+## Veep is Update to `vis.vim`
+
+Veep is an update to `vis.vim`, and owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection and pasting it to a new buffer, then applying the Ex command to the contents of the new buffer, then copying the changed contents of the new buffer, and pasting it back over the original selection, an approach that proves (surprisingly) robust.
+
+The history of this clever trick can traced back by checking the sources. [The version of `vis.vim` available on vim.org](https://www.vim.org/scripts/script.php?script_id=1195) links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back: "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc." The name "vis" is probably for visual (as in a visual selection) and the `:B` command `vis.vim` uses is probably for "block" (Dr. Chip's description "Performs an Ex command on a ctrl-v highlighted block. I often use it to target substitutes onto just a visual-block selection."
+
+Veep started out as a fork of `vis.vim` with minor changes to how whitespace is handled, but more changes evolved overtime to warrant a separate release.
+
+## Veep vs. `vis.vim`
+
+The main differences between Veep and `vis.vim`:
+
+- Uses `:P` (for "pipe") instead of `:B` (for "block").
+- Adds the `:Psh` command to provide shell completion (`:P` takes an Ex command so it uses Ex command completion instead of shell completion [strangely, `:P !<command>` in Neovim will actually use shell completion, but not Vim]).
+- Binds `!` in visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
+- Includes the `:Pnew`, `:Pvnew`, `Penew`, and `tabedit` family of commands that put the result in a new buffer instead of replacing the visual selection.
+
+## Veep Examples
 
 - `:P <ex-command>`: Run an ex command but only use the visual selection, not the whole lines in the range (e.g., `:P sort` will sort a column selected with `C-v`, rather than all the lines in the range [`:sort` always sorts the whole lines in the range]).
-- `:Pn <ex-command>`, `:Pv <ex-command>`, `:Ptabe <ex-command>`: Like `P`, but put the result in a new horizontal split, vertical split, or a new tab.
-- `:Pn`, `:Pv`, `:Ptabe`: Omit the command to put the visual selection in a new horizontal split, vertical split, or a new tab.
+- `:Pnew <ex-command>`, `:Pvnew <ex-command>`, `:Ptabedit <ex-command>`: Like `P`, but put the result in a new horizontal split, vertical split, or a new tab.
+- `:Pnew`, `:Pvnew`, `:Ptabedit`: Omit the command to put the visual selection in a new horizontal split, vertical split, or a new tab.
 - `!`, `:P !`: Like `:P` but for shell commands, pipe the current selection through a shell command, but only use the visual selection, not the whole lines in the range.
 
 ## `:P`
 
-`:P` (stands for "pipe") takes a command, and that command's arguments, as its arguments, and applies that command the visual selection. This is similar to the builtin support for running commands on a range, `'<,'><command>`, the builtin range support *only works on full lines*, whereas the `:P` command also works on visual selections consisting of partial lines. Vim does not have a builtin way to apply a command to a selection that consists of partial lines. So if part of a line is selected with `v` or `CTRL-v`, `'<,'><command>` will still apply the command to the full line, whereas the `:P` command will only apply command to the selected part of the line.
+`:P` (for "pipe") takes a command, and that command's arguments, as its arguments, and applies that command the visual selection. This is similar to the builtin support for running commands on a range, `'<,'><command>`, the builtin range support *only works on full lines*, whereas the `:P` command also works on visual selections consisting of partial lines. Vim does not have a builtin way to apply a command to a selection that consists of partial lines. So if part of a line is selected with `v` or `CTRL-v`, `'<,'><command>` will still apply the command to the full line, whereas the `:P` command will only apply command to the selected part of the line.
 
 Using `:P !<shell-command>` will run a shell command on the visual selection.
 
-The inspiration for `:P`, as well implementation ideas, came from the `:B` in the [vis](https://www.vim.org/scripts/script.php?script_id=1195) plugin.
-
-The command passed as an argument to `:P` must support ranges.
+The commands passed as an argument to `:P` must support ranges, unless `:P!` is used, in which case they must *not* require a range.
 
 ### `:Psh`
 
@@ -29,7 +56,7 @@ Veep binds `!` visual mode to use `:Psh` if there's a character-wise (`v`) or bl
 
 ### `:Pn[ew][!]`
 
-Like `:P` but put the results in a new buffer.
+Like `:P` but put the results in a new buffer (which is useful for example to just see the output of a command, rather than replacing the selection).
 
 With a bang (`!`) omit the range to perform a normal mode command that doesn't take a range.
 
@@ -55,7 +82,7 @@ Take this example of a Markdown table:
 | Row 3 Cell 1 | Row 3 Cell 2 | Row 3 Cell 3 |
 ```
 
-Use visual mode blockwise `<C-v>` to select `Header 3` rows 1-3, then try `P s/Row/Low` to replace in only the selection.
+Use visual mode block-wise `<C-v>` to select `Header 3` rows 1-3, then try `P s/Row/Low` to replace in only the selection.
 
 Another example is just doing a replacement on part of a line:
 
