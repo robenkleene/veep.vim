@@ -5,9 +5,9 @@ function! veep#Part(bang, cmd, split) range abort
   endif
   let l:save = @@
 
-  execute 'silent noautocmd keepjumps normal! gv'
+  silent noautocmd keepjumps normal! gv
   let l:mode = mode(1)
-  execute 'silent noautocmd keepjumps normal! y'
+  silent noautocmd keepjumps normal! y
   if empty(a:split)
     new
   else
@@ -17,7 +17,7 @@ function! veep#Part(bang, cmd, split) range abort
   setlocal undolevels=-1
 
   setlocal buftype=nofile bufhidden=hide noswapfile
-  execute 'silent noautocmd keepjumps normal! Vp'
+  silent noautocmd keepjumps normal! Vp
 
   if !empty(a:cmd)
     " Support `%` and `#`
@@ -38,15 +38,15 @@ function! veep#Part(bang, cmd, split) range abort
   if empty(a:split)
     if l:success
       if l:mode == 'v'
-        execute 'silent noautocmd keepjumps normal! ggvGg_y'
+        silent noautocmd keepjumps normal! ggvGg_y
       elseif l:mode == 'V'
-        execute 'silent noautocmd keepjumps normal! ggVGy'
+        silent noautocmd keepjumps normal! ggVGy
       elseif l:mode == "\<C-V>"
         " Use `^V ^V` to insert the `^V` for the blockwise selection
         execute 'silent noautocmd keepjumps normal! ggG$y'
       endif
       bd!
-      execute 'silent noautocmd keepjumps normal! gvp'
+      silent noautocmd keepjumps normal! gvp
     else
       bd!
     endif
