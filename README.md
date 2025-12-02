@@ -2,7 +2,7 @@
 
 Veep ("V" for visual and "P" for pipe) is an update to [`vis.vim`](https://www.vim.org/scripts/script.php?script_id=1195), a Vim plugin for operating on *parts* of lines with Ex commands. 
 
-For example, `:P sort` with a blockswise visual selection (e.g., with `<C-v>`) will sort a *column* of text, and `:Psh rev` with a characterwise visual selection will run the shell command `rev` on *part* of a line.
+For example, `:P sort` with a blockswise visual selection (e.g., with `<C-v>`) will sort a *column* of text, and `:Psh rev` with a characterwise visual selection will reverse *part* of a line using the `rev` shell command.
 
 ## Why Is This Plugin Necessary?
 
