@@ -8,7 +8,9 @@ For example, `:P sort` with a blockswise visual selection (e.g., with `<C-v>`) w
 
 In Vim, Ex commands operate on *a range of lines*, and they cannot operate on just *part* of each line in a selection.
 
-A common way to use Ex commands is to create a visual selection, and then hit `:` to enter Vim's command line. If there's a visual selection, then Vim will automatically add `'<,'>` after the `:`, Vim's command line code for representing the current visual selection. Vim will enter `'<,'>`, regardless of whether a selection is [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`), or [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) selections (with `V`). But `'<,'>` only matches the visual selection when the selection is linewise. This is where plugins like `vis.vim` and Veep come in. These plugins allow Ex commands to *operate on any visual selection*.
+A common way to use Ex commands is to create a visual selection, and then hit `:` to enter Vim's command line. Vim prepopluates the command line with `:'<,'>`, if there's a visual selection. `'<` and `'>` represent the first and last line of the visual selection. Ex commands can also use line numbers as the first and last line (e.g., `:1,9sort` to sort the first nine lines).
+
+Vim enters `:'<,'>`, regardless of whether a selection is [character-wise](https://vimhelp.org/visual.txt.html#characterwise-visual) (with `v`) or [block-wise](https://vimhelp.org/visual.txt.html#blockwise-visual) (with `<C-v>`), or [line-wise](https://vimhelp.org/visual.txt.html#linewise-visual) selections (with `V`). But `'<,'>` only matches the visual selection when the selection is linewise. This is where plugins like `vis.vim` and Veep come in. These plugins allow Ex commands to *operate on any visual selection*.
 
 ### A Brief History of Ex Commands
 
