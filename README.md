@@ -20,20 +20,26 @@ Vi, and later Vim, have evolved a lot since then, but this is the historical rea
 
 ## Veep Is an Update to `vis.vim`
 
-Veep owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection and pasting it to a new buffer, then applying the Ex command to the contents of the new buffer, then copying the changed contents of the new buffer, and pasting it back over the original selection, an approach that proves (surprisingly) robust.
+Veep owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection, pasting it to a new buffer, then applying the Ex command to the contents of the new buffer, then copying the changed contents of the new buffer, and pasting it back over the original selection. This approach proves to be surpisingly robust.
 
-The history of this clever trick can traced back by checking the sources. [The version of `vis.vim` available on vim.org](https://www.vim.org/scripts/script.php?script_id=1195) links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back: "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc." The name "vis" is probably for visual (as in a visual selection) and the `:B` command `vis.vim` uses is probably for "block" (Dr. Chip's description "Performs an Ex command on a ctrl-v highlighted block. I often use it to target substitutes onto just a visual-block selection."
+The history of this trick can traced back further to reveal more of its history. [The version of `vis.vim` available on vim.org](https://www.vim.org/scripts/script.php?script_id=1195) is from [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which adds further credit there:
 
-Veep started out as a fork of `vis.vim` with minor changes to how whitespace is handled, but more changes have been added overtime to warrant a separate release.
+> The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc.
+
+The name "vis" is probably for "visual" (as in a [visual mode](https://vimhelp.org/visual.txt.html)) and its `:B` command for "block", based on Dr. Chip's description:
+
+> Performs an Ex command on a ctrl-v highlighted block. I often use it to target substitutes onto just a visual-block selection.
+
+Veep itself began as a fork of `vis.vim` with minor changes to whitespace handling, but since then more changes have been added over time to warrant a separate release.
 
 ## Veep vs. `vis.vim`
 
 The main differences between Veep and `vis.vim`:
 
 - Uses `:P` (for "pipe") instead of `:B` (for "block").
-- Adds the `:Psh` command to provide shell completion (`:P` takes an Ex command so it uses Ex command completion instead of shell completion [strangely, `:P !<command>` in Neovim will actually use shell completion, but not Vim]).
-- Binds `!` in visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
-- Includes the `:Pnew`, `:Pvnew`, `Penew`, and `tabedit` family of commands that put the result in a new buffer instead of replacing the visual selection.
+- Adds the `:Psh` command to provide shell completion (the `:P` takes an Ex command so it uses *Ex command completion* instead of *shell completion* [strangely, `:P !<command>` does actually provide shell completion in Neovim, but not Vim itself]).
+- Binds `!` in visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection (and the normal `!` behavior for line-wise [`V`] selection).
+- Includes the `:Pnew`, `:Pvnew`, `Penew`, and `Ptabedit` family of commands that put the result into a new buffer instead of replacing the visual selection.
 
 ## Veep Examples
 
