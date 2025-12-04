@@ -16,15 +16,15 @@ Vim will enter `:'<,'>`, regardless of whether the current selection is [charact
 
 Ex commands are named after the [Ex editor](https://en.wikipedia.org/wiki/Ex_(text_editor)) which is a [line editor](https://en.wikipedia.org/wiki/Line_editor) (like the more famous [ed](https://en.wikipedia.org/wiki/Ed_(software))). A line editor is a text editor that is designed to edit one line of text at a time. Vim's predecessor, [Vi](https://en.wikipedia.org/wiki/Vi_(text_editor)), is named such after the `visual` command in Ex that switches it to a full screen editing mode that shows the contents of the buffer while editing. In a line editor, the contents of the buffer isn't displayed by default, instead commands display the contents of lines, like `5n` to move to then print the contents of the fifth line in `ed`.
 
-Vi, and later Vim, have evolved a lot since then, but this is the historical reason that Ex commands *only operate on whole lines*, that those commands were designed for an editor where operating on lines of text was the primary mode of operation, and, e.g., concepts like a selection, that could include part of a line, or a rectangular selection that spans part of multiple lines.
+Vi, and later Vim, have evolved a lot since then, but this is the historical reason why Ex commands *only operate on whole lines*, because the commands were designed for an editor where editing whole lines of text was the primary mode of operation. Before concepts like a selection that could span just part of a line, or a rectangular selection that spans part of multiple lines, were invented yet.
 
-## Veep is Update to `vis.vim`
+## Veep Is an Update to `vis.vim`
 
-Veep is an update to `vis.vim`, and owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection and pasting it to a new buffer, then applying the Ex command to the contents of the new buffer, then copying the changed contents of the new buffer, and pasting it back over the original selection, an approach that proves (surprisingly) robust.
+Veep owes it's implementation to the clever trick `vis.vim` uses to operate on a visual selection: Yanking the contents of the visual selection and pasting it to a new buffer, then applying the Ex command to the contents of the new buffer, then copying the changed contents of the new buffer, and pasting it back over the original selection, an approach that proves (surprisingly) robust.
 
 The history of this clever trick can traced back by checking the sources. [The version of `vis.vim` available on vim.org](https://www.vim.org/scripts/script.php?script_id=1195) links to [Dr Chip's Vim Page](http://www.drchip.org/astronaut/vim/index.html#VIS), which then further traces credit back: "The original <vis.vim> was by Stefan Roemer, but this one has been radically modified to support embedded tabs. It appears to operate considerably faster, and has no side effects on register usage, etc." The name "vis" is probably for visual (as in a visual selection) and the `:B` command `vis.vim` uses is probably for "block" (Dr. Chip's description "Performs an Ex command on a ctrl-v highlighted block. I often use it to target substitutes onto just a visual-block selection."
 
-Veep started out as a fork of `vis.vim` with minor changes to how whitespace is handled, but more changes evolved overtime to warrant a separate release.
+Veep started out as a fork of `vis.vim` with minor changes to how whitespace is handled, but more changes have been added overtime to warrant a separate release.
 
 ## Veep vs. `vis.vim`
 
