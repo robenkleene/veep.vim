@@ -54,13 +54,19 @@ The main differences between Veep and `vis.vim`:
 
 Using `:P !<shell-command>` will run a shell command on the visual selection.
 
-The commands passed as an argument to `:P` must support ranges, unless `:P!` is used, in which case they must *not* require a range.
+The commands passed as an argument to `:P` must support ranges.
+
+With a bang (`!`) show output in the echo area instead of replacing the selection (e.g., `Psh! wc`).
 
 ### `:Psh`
 
 `:Psh` is shorthand for `P !` (i.e., run a shell command on the visual selection) that allows tab completion. (`P !<tab>` uses shell completion in Neovim, but it does not in Vim, so `Psh <tab>` can be used for shell completion in Vim.)
 
 Veep binds `!` visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection, and the normal `!` behavior for line-wise `V`.
+
+### `:Pe[x][!]`
+
+Like `:P` but omit the range when running an Ex command, this allows commands that don't require an Ex command to be run that will fail if a range is included (e.g., `:Pex make`).
 
 ### `:Pn[ew][!]`
 
