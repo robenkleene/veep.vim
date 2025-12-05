@@ -1,4 +1,4 @@
-function! veep#Part(bang, cmd, split) range abort
+function! veep#Part(bang, cmd, split = '', range = v:true) range abort
   if a:firstline == 0 && a:lastline == 0
     echohl ErrorMsg | echomsg "Warning: No range provided for P command." | echohl None
     return
@@ -24,10 +24,10 @@ function! veep#Part(bang, cmd, split) range abort
     let l:cmd = expandcmd(a:cmd)
     let l:success = 1
     try
-      if a:bang
-        execute 'silent noautocmd keepjumps '.l:cmd
-      else
+      if a:range
         execute 'silent noautocmd keepjumps 0,$'.l:cmd
+      else
+        execute 'silent noautocmd keepjumps '.l:cmd
       endif
     catch
       let l:success = 0
@@ -46,7 +46,11 @@ function! veep#Part(bang, cmd, split) range abort
         execute 'silent noautocmd keepjumps normal! ggG$y'
       endif
       bd!
-      silent noautocmd keepjumps normal! gvp
+      if !a:bang
+        silent noautocmd keepjumps normal! gvp
+      else
+        echo @"
+      endif
     else
       bd!
     endif
