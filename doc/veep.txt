@@ -1,0 +1,174 @@
+*veep.txt*      Pipe visual selections through Ex and shell commands
+
+Author:  Roben Kleene
+License: Same terms as Vim itself (see |license|)
+
+
+INTRODUCTION                                        *veep*
+
+Veep provides commands for piping *characterwise* and *blockwise* visual
+selections through Ex and shell commands.  Built-in Vim ranges always operate
+on whole lines, so commands such as `:'<,'>sort` cannot operate on partial
+lines.  Veep fills this gap.
+
+
+COMPARISON WITH VIS.VIM                             *veep-vis*
+
+Main differences between Veep and vis.vim:
+
+• Uses `:P` ("pipe") instead of `:B` ("block").
+• Adds |:Psh|, which provides shell completion.  `:P` completes as an Ex
+  command, so it does not use shell completion in Vim (Neovim does shell
+  complete for `:P !cmd`, but Vim does not).
+• Maps `!` in Visual mode so that characterwise (`v`) and blockwise (`CTRL-V`)
+  selections use `:Psh`, while linewise (`V`) uses the built-in `!`.
+• Adds |:Pnew|, |:Pvnew|, |:Penew|, and |:Ptabedit| which send the result to a
+  *new* buffer (split or tab) instead of replacing the selection.
+
+
+EXAMPLES                                            *veep-examples*
+
+`:P {ex-command}`       Run {ex-command} *only* on the selected text.  Unlike
+                        |:sort|, which always operates linewise, `:P sort`
+                        will sort only the visually selected block of text.
+
+`:Pnew {ex-command}`    Like `:P`, but place the results in a new horizontal
+`:Pvnew {ex-command}`   or vertical split.
+`:Ptabedit {ex-command}`  Same, but open in a new tab.
+
+`:Pnew`                 With no command, copy the selection into a new buffer.
+`:Pvnew`
+`:Ptabedit`
+
+`!`                    In Visual mode, run a shell command on the selection.
+`:P !{cmd}`            Equivalent, but explicit.
+
+
+THE :P COMMAND                                       *veep-:P*  *:P*
+
+:P {command} [arguments]
+
+`:P` applies an Ex command to the *exact* visual selection, even when that
+selection spans only part of a line.  Native Vim does not support this: a range
+such as `'<,'>` always expands to whole lines.
+
+Examples:
+    v/CTRL-V select partial text, then:
+        :P s/foo/bar/
+        :P sort
+        :P !sed 's/x/y/'
+
+`:P !{shell-command}` runs a shell command on the selection.
+
+The commands given to `:P` must support ranges.
+
+With a bang:
+        :P! wc
+the output is displayed rather than replacing the selection.
+
+
+THE :Psh COMMAND                                     *veep-:Psh*  *:Psh*
+
+:Psh {shell-command}
+
+Shorthand for `:P !{shell-command}`, but provides shell completion in Vim.
+
+Veep also remaps Visual `!`:
+• characterwise or blockwise → `:Psh`
+• linewise → built-in `!`
+
+
+THE :Pex FAMILY                                      *veep-:Pe*  *veep-:Pex*
+
+:Pe[x][!] {command}
+
+Like |:P| but *omit* the range.  This is necessary for commands that fail when
+a range is supplied (e.g. `:make`).
+
+Example:
+        :Pex make
+
+
+THE :Pnew FAMILY                                     *veep-:Pnew*  *:Pnew*
+
+:Pn[ew][!] {command}
+        Like `:P`, but put the results in a new buffer instead of replacing
+        the selection.
+
+With `!`, the range is omitted, allowing normal-mode commands that do not take
+ranges.
+
+With no arguments:
+        :Pnew
+copies the selection to a new buffer.
+
+
+THE :Pvnew COMMAND                                   *veep-:Pvnew*  *:Pvnew*
+
+:Pv[new][!] {command}
+        Like |:Pnew| but open the results in a *vertical* split.
+
+
+THE :Ptabedit / :Ptabnew                             *veep-:Ptabedit*
+
+:Ptabn[ew][!] {command}
+:Ptabe[dit][!] {command}
+
+Like |:Pnew| but open the results in a new tabpage.
+
+
+EXAMPLES IN DETAIL                                   *veep-examples-table*
+
+Example Markdown table:
+
+>
+| Header 1     | Header 2     | Header 3     |
+|--------------|--------------|--------------|
+| Row 1 Cell 1 | Row 1 Cell 2 | Row 1 Cell 3 |
+| Row 2 Cell 1 | Row 2 Cell 2 | Row 2 Cell 3 |
+| Row 3 Cell 1 | Row 3 Cell 2 | Row 3 Cell 3 |
+<
+
+Use blockwise Visual mode (`CTRL-V`) to select “Header 3” through rows 1–3.
+Then:
+
+        :P s/Row/Low/
+
+Only the selected region is modified.
+
+Another partial-line example:
+
+>
+Who put the bomp in the "bomp bah bomp bah bomp?"
+<
+
+Select text inside the quotes, then:
+
+        :P s/bomp/plomp/g
+
+Shell example:
+
+        :P !sed 's/bomp/plomp/g'
+        :Psh sed 's/bomp/plomp/g'
+
+Both modify only the selected region.
+
+
+BUILT-IN ALTERNATIVE                                 *veep-alternative*
+
+Vim has no builtin for applying Ex commands to partial lines.  The closest
+built-in approach is:
+
+1. Yank the selection into a new buffer.
+2. Apply the command in that buffer.
+3. Reselect the same type of Visual selection (characterwise or blockwise).
+4. Return to the original buffer and paste over the old selection.
+
+This is effectively what Veep automates internally.
+
+
+ABOUT                                               *veep-about*
+
+Source / issues:  https://github.com/robenkleene/veep
+
+ vim:tw=78:et:ft=help:norl:
