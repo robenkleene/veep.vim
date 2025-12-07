@@ -38,6 +38,7 @@ The main differences between Veep and `vis.vim`:
 
 - Uses `:P` (for "pipe") instead of `:B` (for "block").
 - Adds the `:Psh` command to provide shell completion (the `:P` takes an Ex command so it uses *Ex command completion* instead of *shell completion* [strangely, `:P !<command>` does actually provide shell completion in Neovim, but not Vim itself]).
+- Both `:P` and `:Psh` take an optional bang (`:P!` and `:Psh!`) to display the result of the command in the echo area instead of replacing the selection.
 - Binds `!` in visual mode to use `:Psh` if there's a character-wise (`v`) or block-wise (`<C-v>`) visual selection (and the normal `!` behavior for line-wise [`V`] selection).
 - Includes the `:Pnew`, `:Pvnew`, `Penew`, and `Ptabedit` family of commands that put the result into a new buffer instead of replacing the visual selection.
 
