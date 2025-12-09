@@ -21,27 +21,23 @@ in the echo area instead of replacing the selection.
 
 
 
-THE :Psh COMMAND                                     *veep-:Psh*  *:Psh*
+                                                    *veep-:Psh*  *:Psh*
 
 :Psh {shell-command}
 
-Shorthand for `:P !{shell-command}`, but provides shell completion in Vim.
+Shorthand for ":P !{shell-command}" and with "-complete=shellcmd" (":P"
+uses -complete=command).
 
-Veep also remaps Visual `!`:
-• characterwise or blockwise → `:Psh`
-• linewise → built-in `!`
+Veep also remaps Visual "!" to this command if the current selection is
+characterwise or blockwise (linewise selection uses the built in "!").
 
-
-THE :Pex FAMILY                                      *veep-:Pe*  *veep-:Pex*
+                                                    *veep-:Pe*  *veep-:Pex*
 
 :Pe[x][!] {command}
 
-Like |:P| but *omit* the range.  This is necessary for commands that fail when
-a range is supplied (e.g. `:make`).
-
-Example:
-        :Pex make
-
+Like |:P| but *omit* the range when running the command this allows commands
+like |:make| to be run that normally fail if a range is included when they're
+run.
 
 THE :Pnew FAMILY                                     *veep-:Pnew*  *:Pnew*
 
