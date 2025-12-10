@@ -21,7 +21,7 @@ in the echo area instead of replacing the selection.
 
 
 
-                                                    *veep-:Psh*  *:Psh*
+                                                    *veep-:Psh*
 
 :Psh {shell-command}
 
@@ -31,94 +31,47 @@ uses -complete=command).
 Veep also remaps Visual "!" to this command if the current selection is
 characterwise or blockwise (linewise selection uses the built in "!").
 
-                                                    *veep-:Pe*  *veep-:Pex*
+                                                    *veep-:Pex*
 
 :Pe[x][!] {command}
 
-Like |:P| but *omit* the range when running the command this allows commands
-like |:make| to be run that normally fail if a range is included when they're
-run.
+Like |:P| the range is ommitted when running the command this allows commands
+like |:make| to be run that normally fail if a range is included when run.
 
-THE :Pnew FAMILY                                     *veep-:Pnew*  *:Pnew*
+                                                     *veep-:Pnew*
 
 :Pn[ew][!] {command}
-        Like `:P`, but put the results in a new buffer instead of replacing
-        the selection.
 
-With `!`, the range is omitted, allowing normal-mode commands that do not take
-ranges.
+Like |:P|, but put the result in a new buffer instead of replacing the
+selection.
 
-With no arguments:
-        :Pnew
-copies the selection to a new buffer.
+With a "!" the range is ommitted when running the command this allows commands
+like |:make| to be run that normally fail if a range is included when run.
 
+If the command is omitted, a new buffer is created with the contents of the
+selection unmodified.
 
-THE :Pvnew COMMAND                                   *veep-:Pvnew*  *:Pvnew*
+                                                     *veep-:Pvnew*
 
 :Pv[new][!] {command}
-        Like |:Pnew| but open the results in a *vertical* split.
 
+Like |:Pnew| but put the results in a vertical split.
 
-THE :Ptabedit / :Ptabnew                             *veep-:Ptabedit*
+                                                     *veep-:Penew*
+
+:Pe[new][!] {command}
+
+Like |:Pnew| but put the results in a new buffer.
+
+                                                     *veep-:Ptabedit*
 
 :Ptabn[ew][!] {command}
 :Ptabe[dit][!] {command}
 
-Like |:Pnew| but open the results in a new tabpage.
-
-
-EXAMPLES IN DETAIL                                   *veep-examples-table*
-
-Example Markdown table:
-
->
-| Header 1     | Header 2     | Header 3     |
-|--------------|--------------|--------------|
-| Row 1 Cell 1 | Row 1 Cell 2 | Row 1 Cell 3 |
-| Row 2 Cell 1 | Row 2 Cell 2 | Row 2 Cell 3 |
-| Row 3 Cell 1 | Row 3 Cell 2 | Row 3 Cell 3 |
-<
-
-Use blockwise Visual mode (`CTRL-V`) to select “Header 3” through rows 1–3.
-Then:
-
-        :P s/Row/Low/
-
-Only the selected region is modified.
-
-Another partial-line example:
-
->
-Who put the bomp in the "bomp bah bomp bah bomp?"
-<
-
-Select text inside the quotes, then:
-
-        :P s/bomp/plomp/g
-
-Shell example:
-
-        :P !sed 's/bomp/plomp/g'
-        :Psh sed 's/bomp/plomp/g'
-
-Both modify only the selected region.
-
-
-BUILT-IN ALTERNATIVE                                 *veep-alternative*
-
-Vim has no builtin for applying Ex commands to partial lines.  The closest
-built-in approach is:
-
-1. Yank the selection into a new buffer.
-2. Apply the command in that buffer.
-3. Reselect the same type of Visual selection (characterwise or blockwise).
-4. Return to the original buffer and paste over the old selection.
-
-This is effectively what Veep automates internally.
-
+Like |:Pnew| but open the results in a new tab page.
 
 ABOUT                                               *veep-about*
 
-Source / issues:  https://github.com/robenkleene/veep
+https://github.com/robenkleene/veep
 
  vim:tw=78:et:ft=help:norl:
