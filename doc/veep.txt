@@ -1,0 +1,66 @@
+*veep.txt*      Pipe visual selections through Ex and shell commands
+
+Author:  Roben Kleene
+License: Same terms as Vim itself (see |license|)
+
+INTRODUCTION                                        *veep*
+
+Veep provides commands for running Ex commands and shell commands on
+*characterwise* and *blockwise* visual selections.  Built-in Vim ranges always
+operate on whole lines, so commands cannot operate on parts lines, Veep allows
+running commands on parts lines.
+
+                                                    *veep-:P*
+:P[!] {command}
+
+Applies an Ex command to the visual selection. With a "!" display the result
+in the echo area instead of replacing the selection.
+
+                                                    *veep-:Psh*
+:Psh {shell-command}
+
+Shorthand for ":P !{shell-command}" and with "-complete=shellcmd" (":P"
+uses -complete=command).
+
+Veep also remaps Visual "!" to this command if the current selection is
+characterwise or blockwise (linewise selection uses the built in "!").
+
+                                                    *veep-:Pex*
+:Pe[x][!] {command}
+
+Like |:P| the range is ommitted when running the command this allows commands
+like |:make| to be run that normally fail if a range is included when run.
+
+                                                    *veep-:Pnew*
+:Pn[ew][!] {command}
+
+Like |:P|, but put the result in a new buffer instead of replacing the
+selection.
+
+With a "!" the range is ommitted when running the command this allows commands
+like |:make| to be run that normally fail if a range is included when run.
+
+If the command is omitted, a new buffer is created with the contents of the
+selection unmodified.
+
+                                                     *veep-:Pvnew*
+:Pv[new][!] {command}
+
+Like |:Pnew| but put the results in a vertical split.
+
+                                                     *veep-:Penew*
+:Pe[new][!] {command}
+
+Like |:Pnew| but put the results in a new buffer.
+
+                                                     *veep-:Ptabedit*
+:Ptabn[ew][!] {command}
+:Ptabe[dit][!] {command}
+
+Like |:Pnew| but open the results in a new tab page.
+
+ABOUT                                               *veep-about*
+
+https://github.com/robenkleene/veep
+
+ vim:tw=78:et:ft=help:norl:
