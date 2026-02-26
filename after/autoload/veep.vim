@@ -5,9 +5,14 @@ function! veep#Part(bang, cmd, split = '', range = v:true) range abort
   endif
   let l:save = @@
 
-  silent noautocmd keepjumps normal! gv
-  let l:mode = mode(1)
-  silent noautocmd keepjumps normal! y
+  if mode() =~# "[vV\<C-V>]"
+    silent noautocmd keepjumps normal! gv
+    let l:mode = mode(1)
+    silent noautocmd keepjumps normal! y
+  else
+    let l:mode = 'V'
+    silent noautocmd keepjumps normal! Vy
+  endif
   " Use `tabnew`/`tabclose!` instead of `new`/`close!` so splits in the
   " original tab are not disturbed. Without this, opening a help split
   " (`:h expand()`) then running `:'<,'>P s/foo/bar` causes the help
