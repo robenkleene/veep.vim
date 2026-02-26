@@ -13,8 +13,9 @@ running commands on parts lines.
                                                     *veep-:P*
 :P[!] {command}
 
-Applies an Ex command to the visual selection. With a "!" display the result
-in the echo area instead of replacing the selection.
+Applies an Ex command to the visual selection. If called without a visual
+selection, operates on the current line. With a "!" display the result in the
+echo area instead of replacing the selection.
 
                                                     *veep-:Psh*
 :Psh {shell-command}
