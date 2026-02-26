@@ -8,8 +8,12 @@ function! veep#Part(bang, cmd, split = '', range = v:true) range abort
   silent noautocmd keepjumps normal! gv
   let l:mode = mode(1)
   silent noautocmd keepjumps normal! y
+  " Use `tabnew`/`tabclose!` instead of `new`/`close!` so splits in the
+  " original tab are not disturbed. Without this, opening a help split
+  " (`:h expand()`) then running `:'<,'>P s/foo/bar` causes the help
+  " window to resize.
   if empty(a:split)
-    new
+    noautocmd tabnew
   else
     execute a:split
   endif
@@ -43,16 +47,16 @@ function! veep#Part(bang, cmd, split = '', range = v:true) range abort
         silent noautocmd keepjumps normal! ggVGy
       elseif l:mode == "\<C-V>"
         " Use `^V ^V` to insert the `^V` for the blockwise selection
-        execute 'silent noautocmd keepjumps normal! ggG$y'
+        silent noautocmd keepjumps normal! ggG$y
       endif
-      bd!
+      noautocmd tabclose!
       if !a:bang
         silent noautocmd keepjumps normal! gvp
       else
         echo @"
       endif
     else
-      bd!
+      noautocmd tabclose!
     endif
   else
     " If a new split is created, goto first line
