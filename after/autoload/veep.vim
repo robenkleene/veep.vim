@@ -5,7 +5,7 @@ function! veep#Part(bang, cmd, split = '', range = v:true) range abort
   endif
   let l:save = @@
 
-  if mode() =~# "[vV\<C-V>]"
+  if line("'<") == a:firstline && line("'>") == a:lastline
     silent noautocmd keepjumps normal! gv
     let l:mode = mode(1)
     silent noautocmd keepjumps normal! y
